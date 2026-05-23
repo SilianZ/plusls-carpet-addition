@@ -31,24 +31,24 @@ import java.util.function.Supplier;
 @Mixin(ServerLevel.class)
 public abstract class MixinServerLevel extends Level {
     //#if MC > 11903
-    //$$ protected MixinServerLevel(WritableLevelData properties, ResourceKey<Level> registryRef, RegistryAccess registryAccess, Holder<DimensionType> dimension, Supplier<ProfilerFiller> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
-    //$$     super(properties, registryRef, registryAccess, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
+    //$$ protected MixinServerLevel(WritableLevelData Silian_properties, ResourceKey<Level> Silian_registryRef, RegistryAccess Silian_registryAccess, Holder<DimensionType> Silian_dimension, Supplier<ProfilerFiller> Silian_profiler, boolean Silian_isClient, boolean Silian_debugWorld, long Silian_seed, int Silian_maxChainedNeighborUpdates) {
+    //$$     super(Silian_properties, Silian_registryRef, Silian_registryAccess, Silian_dimension, Silian_profiler, Silian_isClient, Silian_debugWorld, Silian_seed, Silian_maxChainedNeighborUpdates);
     //$$ }
     //#elseif MC > 11802
-    //$$ protected MixinServerLevel(WritableLevelData properties, ResourceKey<Level> registryRef, Holder<DimensionType> dimension, Supplier<ProfilerFiller> profiler, boolean isClient, boolean debugWorld, long seed, int maxChainedNeighborUpdates) {
-    //$$     super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed, maxChainedNeighborUpdates);
+    //$$ protected MixinServerLevel(WritableLevelData Silian_properties, ResourceKey<Level> Silian_registryRef, Holder<DimensionType> Silian_dimension, Supplier<ProfilerFiller> Silian_profiler, boolean Silian_isClient, boolean Silian_debugWorld, long Silian_seed, int Silian_maxChainedNeighborUpdates) {
+    //$$     super(Silian_properties, Silian_registryRef, Silian_dimension, Silian_profiler, Silian_isClient, Silian_debugWorld, Silian_seed, Silian_maxChainedNeighborUpdates);
     //$$ }
     //#elseif MC > 11701
-    //$$ protected MixinServerLevel(WritableLevelData properties, ResourceKey<Level> registryRef, Holder<DimensionType> dimension, Supplier<ProfilerFiller> profiler, boolean isClient, boolean debugWorld, long seed) {
-    //$$     super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed);
+    //$$ protected MixinServerLevel(WritableLevelData Silian_properties, ResourceKey<Level> Silian_registryRef, Holder<DimensionType> Silian_dimension, Supplier<ProfilerFiller> Silian_profiler, boolean Silian_isClient, boolean Silian_debugWorld, long Silian_seed) {
+    //$$     super(Silian_properties, Silian_registryRef, Silian_dimension, Silian_profiler, Silian_isClient, Silian_debugWorld, Silian_seed);
     //$$ }
     //#elseif MC > 11502
-    protected MixinServerLevel(WritableLevelData properties, ResourceKey<Level> registryRef, DimensionType dimension, Supplier<ProfilerFiller> profiler, boolean isClient, boolean debugWorld, long seed) {
-        super(properties, registryRef, dimension, profiler, isClient, debugWorld, seed);
+    protected MixinServerLevel(WritableLevelData Silian_properties, ResourceKey<Level> Silian_registryRef, DimensionType Silian_dimension, Supplier<ProfilerFiller> Silian_profiler, boolean Silian_isClient, boolean Silian_debugWorld, long Silian_seed) {
+        super(Silian_properties, Silian_registryRef, Silian_dimension, Silian_profiler, Silian_isClient, Silian_debugWorld, Silian_seed);
     }
     //#else
-    //$$ protected MixinServerLevel(LevelData levelData, DimensionType dimensionType, BiFunction<Level, Dimension, ChunkSource> biFunction, ProfilerFiller profilerFiller, boolean bl) {
-    //$$     super(levelData, dimensionType, biFunction, profilerFiller, bl);
+    //$$ protected MixinServerLevel(LevelData Silian_levelData, DimensionType Silian_dimensionType, BiFunction<Level, Dimension, ChunkSource> Silian_biFunction, ProfilerFiller Silian_profilerFiller, boolean Silian_bl) {
+    //$$     super(Silian_levelData, Silian_dimensionType, Silian_biFunction, Silian_profilerFiller, Silian_bl);
     //$$ }
     //#endif
 
@@ -61,13 +61,13 @@ public abstract class MixinServerLevel extends Level {
                     ordinal = 0
             )
     )
-    void onSetTimeOfDay(ServerLevel world, long timeOfDay) {
+    void onSetTimeOfDay(ServerLevel Silian_world, long Silian_timeOfDay) {
         if (this.isDay() && PluslsCarpetAdditionSettings.sleepingDuringTheDay) {
-            long currentTime = this.levelData.getDayTime();
-            long currentDayTime = this.levelData.getDayTime() % 24000L;
-            world.setDayTime(currentTime + 13000L - currentDayTime);
+            long Silian_currentTime = this.levelData.getDayTime();
+            long Silian_currentDayTime = this.levelData.getDayTime() % 24000L;
+            Silian_world.setDayTime(Silian_currentTime + 13000L - Silian_currentDayTime);
         } else {
-            world.setDayTime(timeOfDay);
+            Silian_world.setDayTime(Silian_timeOfDay);
         }
     }
 }

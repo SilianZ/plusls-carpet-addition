@@ -23,8 +23,8 @@ public class MixinSlot {
     //$$                 ordinal = 0
     //$$         )
     //$$ )
-    //$$ private int getMaxItemCountGetMaxCount(ItemStack itemStack) {
-    //$$     return ShulkerBoxItemUtil.getMaxCount(itemStack);
+    //$$ private int getMaxItemCountGetMaxCount(ItemStack Silian_itemStack) {
+    //$$     return ShulkerBoxItemUtil.getMaxCount(Silian_itemStack);
     //$$ }
     //#endif
 }

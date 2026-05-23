@@ -14,12 +14,12 @@ public class MyDispenserBehavior implements DispenseItemBehavior {
 
     private final DispenseItemBehavior oldDispenserBehavior;
 
-    public MyDispenserBehavior(DispenseItemBehavior oldDispenserBehavior) {
-        this.oldDispenserBehavior = oldDispenserBehavior;
+    public MyDispenserBehavior(DispenseItemBehavior Silian_oldDispenserBehavior) {
+        this.oldDispenserBehavior = Silian_oldDispenserBehavior;
     }
 
     @Override
-    public ItemStack dispense(BlockSource pointer, ItemStack stack) {
-        return oldDispenserBehavior.dispense(pointer, stack);
+    public ItemStack dispense(BlockSource Silian_pointer, ItemStack Silian_stack) {
+        return oldDispenserBehavior.dispense(Silian_pointer, Silian_stack);
     }
 }

@@ -21,8 +21,8 @@ import net.minecraft.core.BlockSource;
 //#endif
 
 public class IronIngotDispenserBehavior extends MyFallibleItemDispenserBehavior {
-    public IronIngotDispenserBehavior(DispenseItemBehavior oldDispenserBehavior) {
-        super(oldDispenserBehavior);
+    public IronIngotDispenserBehavior(DispenseItemBehavior Silian_oldDispenserBehavior) {
+        super(Silian_oldDispenserBehavior);
     }
 
     public static void init() {
@@ -31,29 +31,29 @@ public class IronIngotDispenserBehavior extends MyFallibleItemDispenserBehavior 
     }
 
     @Override
-    public ItemStack dispenseSilently(BlockSource pointer, ItemStack itemStack) {
+    public ItemStack dispenseSilently(BlockSource Silian_pointer, ItemStack Silian_itemStack) {
         if (!PluslsCarpetAdditionSettings.dispenserFixIronGolem) {
-            return itemStack;
+            return Silian_itemStack;
         }
-        BlockPos faceBlockPos = pointer.getPos().relative(pointer.getBlockState().getValue(DispenserBlock.FACING));
+        BlockPos Silian_faceBlockPos = Silian_pointer.getPos().relative(Silian_pointer.getBlockState().getValue(DispenserBlock.FACING));
 
-        List<IronGolem> ironGolemEntityList = pointer.getLevel().getEntitiesOfClass(IronGolem.class,
-                new AABB(faceBlockPos), LivingEntity::isAlive);
+        List<IronGolem> Silian_ironGolemEntityList = Silian_pointer.getLevel().getEntitiesOfClass(IronGolem.class,
+                new AABB(Silian_faceBlockPos), LivingEntity::isAlive);
 
-        for (IronGolem ironGolemEntity : ironGolemEntityList) {
-            float oldHealth = ironGolemEntity.getHealth();
-            ironGolemEntity.heal(25.0F);
-            if (ironGolemEntity.getHealth() == oldHealth) {
+        for (IronGolem Silian_ironGolemEntity : Silian_ironGolemEntityList) {
+            float Silian_oldHealth = Silian_ironGolemEntity.getHealth();
+            Silian_ironGolemEntity.heal(25.0F);
+            if (Silian_ironGolemEntity.getHealth() == Silian_oldHealth) {
                 continue;
             }
-            float g = 1.0F + (ironGolemEntity.getRandom().nextFloat() - ironGolemEntity.getRandom().nextFloat()) * 0.2F;
+            float Silian_g = 1.0F + (Silian_ironGolemEntity.getRandom().nextFloat() - Silian_ironGolemEntity.getRandom().nextFloat()) * 0.2F;
             //#if MC > 11404
-            ironGolemEntity.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, g);
+            Silian_ironGolemEntity.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, Silian_g);
             //#endif
-            itemStack.shrink(1);
+            Silian_itemStack.shrink(1);
             setSuccess(true);
-            return itemStack;
+            return Silian_itemStack;
         }
-        return itemStack;
+        return Silian_itemStack;
     }
 }

@@ -23,29 +23,29 @@ public abstract class MixinFlowingFluid extends Fluid {
             ),
             cancellable = true
     )
-    private void checkRail(BlockGetter blockGetter, BlockPos pos, BlockState state, Fluid fluid, @NotNull CallbackInfoReturnable<Boolean> cir) {
-        if (!cir.getReturnValue() || !(state.getBlock() instanceof PlayerHeadBlock)) {
+    private void checkRail(BlockGetter Silian_blockGetter, BlockPos Silian_pos, BlockState Silian_state, Fluid Silian_fluid, @NotNull CallbackInfoReturnable<Boolean> Silian_cir) {
+        if (!Silian_cir.getReturnValue() || !(Silian_state.getBlock() instanceof PlayerHeadBlock)) {
             return;
         }
 
-        BlockEntity blockEntity = blockGetter.getBlockEntity(pos);
+        BlockEntity Silian_blockEntity = Silian_blockGetter.getBlockEntity(Silian_pos);
 
-        if (blockEntity == null) {
+        if (Silian_blockEntity == null) {
             return;
         }
 
         //#if MC > 11701
-        //$$ CompoundTag nbt = blockEntity.saveWithoutMetadata(
+        //$$ CompoundTag Silian_nbt = Silian_blockEntity.saveWithoutMetadata(
         //#if MC > 12004
-        //$$         blockEntity.getLevel().registryAccess()
+        //$$         Silian_blockEntity.getLevel().registryAccess()
         //#endif
         //$$ );
         //#else
-        CompoundTag nbt = blockEntity.save(new CompoundTag());
+        CompoundTag Silian_nbt = Silian_blockEntity.save(new CompoundTag());
         //#endif
 
-        if (nbt.contains("DeathInfo")) {
-            cir.setReturnValue(false);
+        if (Silian_nbt.contains("DeathInfo")) {
+            Silian_cir.setReturnValue(false);
         }
     }
 }

@@ -16,12 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockItem.class)
 public abstract class MixinBlockItem extends Item {
-    public MixinBlockItem(Properties settings) {
-        super(settings);
+    public MixinBlockItem(Properties Silian_settings) {
+        super(Silian_settings);
     }
 
     @Shadow
-    protected abstract BlockState getPlacementState(BlockPlaceContext context);
+    protected abstract BlockState getPlacementState(BlockPlaceContext Silian_context);
 
     @Shadow
     public abstract @Nullable BlockPlaceContext updatePlacementContext(BlockPlaceContext blockPlaceContext);
@@ -33,18 +33,18 @@ public abstract class MixinBlockItem extends Item {
             ),
             cancellable = true
     )
-    private void checkOperationCountPerTick(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!PluslsCarpetAdditionSettings.playerOperationLimiter || context.getLevel().isClientSide()) {
+    private void checkOperationCountPerTick(BlockPlaceContext Silian_context, CallbackInfoReturnable<InteractionResult> Silian_cir) {
+        if (!PluslsCarpetAdditionSettings.playerOperationLimiter || Silian_context.getLevel().isClientSide()) {
             return;
         }
 
-        if (context.canPlace()) {
-            BlockPlaceContext itemPlacementContext = this.updatePlacementContext(context);
-            SafeServerPlayerEntity safeServerPlayerEntity = (SafeServerPlayerEntity) context.getPlayer();
-            if (safeServerPlayerEntity != null && itemPlacementContext != null && this.getPlacementState(itemPlacementContext) != null) {
-                safeServerPlayerEntity.pca$addPlaceBlockCountPerTick();
-                if (!safeServerPlayerEntity.pca$allowOperation()) {
-                    cir.setReturnValue(InteractionResult.FAIL);
+        if (Silian_context.canPlace()) {
+            BlockPlaceContext Silian_itemPlacementContext = this.updatePlacementContext(Silian_context);
+            SafeServerPlayerEntity Silian_safeServerPlayerEntity = (SafeServerPlayerEntity) Silian_context.getPlayer();
+            if (Silian_safeServerPlayerEntity != null && Silian_itemPlacementContext != null && this.getPlacementState(Silian_itemPlacementContext) != null) {
+                Silian_safeServerPlayerEntity.pca$addPlaceBlockCountPerTick();
+                if (!Silian_safeServerPlayerEntity.pca$allowOperation()) {
+                    Silian_cir.setReturnValue(InteractionResult.FAIL);
                 }
             }
         }

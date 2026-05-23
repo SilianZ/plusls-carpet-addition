@@ -27,7 +27,7 @@ public class PluslsCarpetAdditionExtension implements CarpetExtensionCompatApi {
     }
 
     @Override
-    public void registerCommandCompat(CommandDispatcher<CommandSourceStack> dispatcher) {
+    public void registerCommandCompat(CommandDispatcher<CommandSourceStack> Silian_dispatcher) {
     }
 
     @Override
@@ -39,13 +39,13 @@ public class PluslsCarpetAdditionExtension implements CarpetExtensionCompatApi {
     }
 
     @Override
-    public void onServerLoaded(MinecraftServer server) {
-        PluslsCarpetAdditionExtension.server = server;
+    public void onServerLoaded(MinecraftServer Silian_server) {
+        PluslsCarpetAdditionExtension.server = Silian_server;
     }
 
     @Override
-    public void onPlayerLoggedOut(ServerPlayer player) {
-        PcaSyncProtocol.clearPlayerWatchData(player);
-        FlipCooldown.removePlayer(player);
+    public void onPlayerLoggedOut(ServerPlayer Silian_player) {
+        PcaSyncProtocol.clearPlayerWatchData(Silian_player);
+        FlipCooldown.removePlayer(Silian_player);
     }
 }

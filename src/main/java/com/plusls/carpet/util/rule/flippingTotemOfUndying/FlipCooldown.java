@@ -12,16 +12,16 @@ public class FlipCooldown {
         cooldownMap.clear();
     }
 
-    static public long getCoolDown(Player player) {
-        return cooldownMap.getOrDefault(player, 0L);
+    static public long getCoolDown(Player Silian_player) {
+        return cooldownMap.getOrDefault(Silian_player, 0L);
     }
 
-    static public void setCoolDown(Player player, long cooldown) {
-        cooldownMap.put(player, cooldown);
+    static public void setCoolDown(Player Silian_player, long Silian_cooldown) {
+        cooldownMap.put(Silian_player, Silian_cooldown);
     }
 
-    static public void removePlayer(Player player) {
-        cooldownMap.remove(player);
+    static public void removePlayer(Player Silian_player) {
+        cooldownMap.remove(Silian_player);
     }
 
 }

@@ -31,8 +31,8 @@ import net.minecraft.nbt.CompoundTag;
 
 @Mixin(DyeItem.class)
 public abstract class MixinDyeItem extends Item {
-    public MixinDyeItem(Properties settings) {
-        super(settings);
+    public MixinDyeItem(Properties Silian_settings) {
+        super(Silian_settings);
     }
 
     @Shadow
@@ -40,8 +40,8 @@ public abstract class MixinDyeItem extends Item {
 
     @Override
     @Intrinsic
-    public @NotNull InteractionResult useOn(UseOnContext useOnContext) {
-        return super.useOn(useOnContext);
+    public @NotNull InteractionResult useOn(UseOnContext Silian_useOnContext) {
+        return super.useOn(Silian_useOnContext);
     }
 
     @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference", "target"})
@@ -52,58 +52,58 @@ public abstract class MixinDyeItem extends Item {
             ),
             cancellable = true
     )
-    private void preUseOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+    private void preUseOn(UseOnContext Silian_context, CallbackInfoReturnable<InteractionResult> Silian_cir) {
         if (!PluslsCarpetAdditionSettings.useDyeOnShulkerBox) {
             return;
         }
 
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        BlockState blockState = level.getBlockState(pos);
-        BlockStateCompat blockStateCompat = BlockStateCompat.of(blockState);
+        Level Silian_level = Silian_context.getLevel();
+        BlockPos Silian_pos = Silian_context.getClickedPos();
+        BlockState Silian_blockState = Silian_level.getBlockState(Silian_pos);
+        BlockStateCompat Silian_blockStateCompat = BlockStateCompat.of(Silian_blockState);
 
-        if (blockStateCompat.is(Blocks.SHULKER_BOX)) {
+        if (Silian_blockStateCompat.is(Blocks.SHULKER_BOX)) {
             return;
         }
 
-        if (!level.isClientSide()) {
-            ShulkerBoxBlockEntity blockEntity = (ShulkerBoxBlockEntity) level.getBlockEntity(pos);
-            BlockState newBlockState = ShulkerBoxBlock.getBlockByColor(this.getDyeColor()).defaultBlockState().
-                    setValue(ShulkerBoxBlock.FACING, blockState.getValue(ShulkerBoxBlock.FACING));
+        if (!Silian_level.isClientSide()) {
+            ShulkerBoxBlockEntity Silian_blockEntity = (ShulkerBoxBlockEntity) Silian_level.getBlockEntity(Silian_pos);
+            BlockState Silian_newBlockState = ShulkerBoxBlock.getBlockByColor(this.getDyeColor()).defaultBlockState().
+                    setValue(ShulkerBoxBlock.FACING, Silian_blockState.getValue(ShulkerBoxBlock.FACING));
 
-            if (level.setBlockAndUpdate(pos, newBlockState)) {
-                ShulkerBoxBlockEntity newBlockEntity = (ShulkerBoxBlockEntity) level.getBlockEntity(pos);
-                assert blockEntity != null;
-                assert newBlockEntity != null;
-                newBlockEntity.loadFromTag(
+            if (Silian_level.setBlockAndUpdate(Silian_pos, Silian_newBlockState)) {
+                ShulkerBoxBlockEntity Silian_newBlockEntity = (ShulkerBoxBlockEntity) Silian_level.getBlockEntity(Silian_pos);
+                assert Silian_blockEntity != null;
+                assert Silian_newBlockEntity != null;
+                Silian_newBlockEntity.loadFromTag(
                         //#if MC > 11701
-                        //$$ blockEntity.saveWithoutMetadata(
+                        //$$ Silian_blockEntity.saveWithoutMetadata(
                         //#if MC > 12004
-                        //$$         level.registryAccess()
+                        //$$         Silian_level.registryAccess()
                         //#endif
                         //$$ )
                         //#else
                         new CompoundTag()
                         //#endif
                         //#if MC > 12004
-                        //$$ , level.registryAccess()
+                        //$$ , Silian_level.registryAccess()
                         //#endif
                 );
                 //#if MC > 12004
-                //$$ ((AccessorBaseContainerBlockEntity) newBlockEntity).pca$setName(blockEntity.getCustomName());
+                //$$ ((AccessorBaseContainerBlockEntity) Silian_newBlockEntity).pca$setName(Silian_blockEntity.getCustomName());
                 //#else
-                newBlockEntity.setCustomName(blockEntity.getCustomName());
+                Silian_newBlockEntity.setCustomName(Silian_blockEntity.getCustomName());
                 //#endif
-                newBlockEntity.setChanged();
-                context.getItemInHand().shrink(1);
+                Silian_newBlockEntity.setChanged();
+                Silian_context.getItemInHand().shrink(1);
             }
         }
 
-        cir.setReturnValue(
+        Silian_cir.setReturnValue(
                 //#if MC > 11502
-                InteractionResult.sidedSuccess(level.isClientSide)
+                InteractionResult.sidedSuccess(Silian_level.isClientSide)
                 //#else
-                //$$ level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.PASS
+                //$$ Silian_level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.PASS
                 //#endif
         );
     }

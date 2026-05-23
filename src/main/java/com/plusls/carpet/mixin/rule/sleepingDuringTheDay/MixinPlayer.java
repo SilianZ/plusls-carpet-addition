@@ -30,15 +30,15 @@ public class MixinPlayer {
     //$$         )
     //$$ )
     //#if MC > 11404
-    //$$ void redirectWakeUp(Player player, boolean updateSleepTimer, boolean updateSleepingPlayers) {
+    //$$ void redirectWakeUp(Player Silian_player, boolean Silian_updateSleepTimer, boolean Silian_updateSleepingPlayers) {
     //#else
-    //$$ void redirectWakeUp(Player player, boolean updateSleepTimer, boolean updateSleepingPlayers, boolean setSpawnPoint) {
+    //$$ void redirectWakeUp(Player Silian_player, boolean Silian_updateSleepTimer, boolean Silian_updateSleepingPlayers, boolean Silian_setSpawnPoint) {
     //#endif
     //$$     if (!PluslsCarpetAdditionSettings.sleepingDuringTheDay) {
     //#if MC > 11404
-    //$$         player.stopSleepInBed(updateSleepTimer, updateSleepingPlayers);
+    //$$         Silian_player.stopSleepInBed(Silian_updateSleepTimer, Silian_updateSleepingPlayers);
     //#else
-    //$$         player.stopSleepInBed(updateSleepTimer, updateSleepingPlayers, setSpawnPoint);
+    //$$         Silian_player.stopSleepInBed(Silian_updateSleepTimer, Silian_updateSleepingPlayers, Silian_setSpawnPoint);
     //#endif
     //$$     }
     //$$ }
@@ -52,12 +52,12 @@ public class MixinPlayer {
     //$$                 ordinal = 0
     //$$         )
     //$$ )
-    //$$ boolean redirectIsDay(@NotNull Level level) {
-    //$$     boolean ret = level.isDay();
-    //$$     if (ret && PluslsCarpetAdditionSettings.sleepingDuringTheDay) {
-    //$$         ret = false;
+    //$$ boolean redirectIsDay(@NotNull Level Silian_level) {
+    //$$     boolean Silian_ret = Silian_level.isDay();
+    //$$     if (Silian_ret && PluslsCarpetAdditionSettings.sleepingDuringTheDay) {
+    //$$         Silian_ret = false;
     //$$     }
-    //$$     return ret;
+    //$$     return Silian_ret;
     //$$ }
     //#endif
 }

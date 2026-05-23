@@ -9,7 +9,7 @@ import net.minecraft.world.InteractionResult;
 public class SleepUtil {
     //#if MC > 11502
     public static void init() {
-        EntitySleepEvents.ALLOW_SLEEP_TIME.register((player, sleepingPos, vanillaResult) -> {
+        EntitySleepEvents.ALLOW_SLEEP_TIME.register((Silian_player, Silian_sleepingPos, Silian_vanillaResult) -> {
             if (PluslsCarpetAdditionSettings.sleepingDuringTheDay) {
                 return InteractionResult.SUCCESS;
             } else {

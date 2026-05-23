@@ -6,5 +6,5 @@ public interface GravesStoneSkullBlockEntity {
     @Nullable
     DeathInfo pca$getDeathInfo();
 
-    void pca$setDeathInfo(DeathInfo deathInfo);
+    void pca$setDeathInfo(DeathInfo Silian_deathInfo);
 }

@@ -20,14 +20,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ComparatorBlockEntity.class)
 public abstract class MixinComparatorBlockEntity extends BlockEntity {
     private MixinComparatorBlockEntity(
-            BlockEntityType<?> blockEntityType
+            BlockEntityType<?> Silian_blockEntityType
             //#if MC > 11605
             //$$ , BlockPos blockPos
             //$$ , BlockState blockState
             //#endif
     ) {
         super(
-                blockEntityType
+                Silian_blockEntityType
                 //#if MC > 11605
                 //$$ , blockPos
                 //$$ , blockState
@@ -48,7 +48,7 @@ public abstract class MixinComparatorBlockEntity extends BlockEntity {
                     value = "RETURN"
             )
     )
-    private void postSetChanged(CallbackInfo ci) {
+    private void postSetChanged(CallbackInfo Silian_ci) {
         if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
             PluslsCarpetAdditionReference.getLogger().debug("update ComparatorBlockEntity: {}", this.worldPosition);
         }

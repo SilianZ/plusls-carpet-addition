@@ -23,10 +23,10 @@ public class MixinBoneMealItem {
             ),
             cancellable = true
     )
-    private static void postGrowCrop(ItemStack stack, Level level, BlockPos pos, @NotNull CallbackInfoReturnable<Boolean> info) {
-        if (!info.getReturnValueZ() && level instanceof ServerLevel && PluslsCarpetAdditionSettings.powerfulBoneMeal) {
-            BlockState blockState = level.getBlockState(pos);
-            info.setReturnValue(Grow.grow(stack, level, pos, blockState.getBlock()));
+    private static void postGrowCrop(ItemStack Silian_stack, Level Silian_level, BlockPos Silian_pos, @NotNull CallbackInfoReturnable<Boolean> Silian_info) {
+        if (!Silian_info.getReturnValueZ() && Silian_level instanceof ServerLevel && PluslsCarpetAdditionSettings.powerfulBoneMeal) {
+            BlockState Silian_blockState = Silian_level.getBlockState(Silian_pos);
+            Silian_info.setReturnValue(Grow.grow(Silian_stack, Silian_level, Silian_pos, Silian_blockState.getBlock()));
         }
     }
 }

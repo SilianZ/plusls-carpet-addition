@@ -11,10 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import top.hendrixshen.magiclib.api.compat.minecraft.world.level.state.BlockStateCompat;
 
 public class Grow {
-    static public boolean grow(ItemStack itemStack, Level world, BlockPos pos, Block block) {
-        if (block instanceof SugarCaneBlock) {
-            return growSugarCaneBlock(itemStack, world, pos);
-        } else if (block instanceof ChorusFlowerBlock) {
+    static public boolean grow(ItemStack Silian_itemStack, Level Silian_world, BlockPos Silian_pos, Block Silian_block) {
+        if (Silian_block instanceof SugarCaneBlock) {
+            return growSugarCaneBlock(Silian_itemStack, Silian_world, Silian_pos);
+        } else if (Silian_block instanceof ChorusFlowerBlock) {
             // TODO
             return false;
         } else {
@@ -22,41 +22,41 @@ public class Grow {
         }
     }
 
-    static private boolean growSugarCaneBlock(ItemStack itemStack, Level level, BlockPos pos) {
-        BlockPos downPos = pos.below();
-        BlockPos upPos = pos.above();
-        int height = 1;
+    static private boolean growSugarCaneBlock(ItemStack Silian_itemStack, Level Silian_level, BlockPos Silian_pos) {
+        BlockPos Silian_downPos = Silian_pos.below();
+        BlockPos Silian_upPos = Silian_pos.above();
+        int Silian_height = 1;
 
         // 计算上层空气坐标
-        while (!level.isEmptyBlock(upPos)) {
-            if (BlockStateCompat.of(level.getBlockState(upPos)).is(Blocks.SUGAR_CANE)) {
-                upPos = upPos.above();
-                height++;
+        while (!Silian_level.isEmptyBlock(Silian_upPos)) {
+            if (BlockStateCompat.of(Silian_level.getBlockState(Silian_upPos)).is(Blocks.SUGAR_CANE)) {
+                Silian_upPos = Silian_upPos.above();
+                Silian_height++;
             } else {
                 return false;
             }
         }
 
         // 计算底部坐标
-        while (BlockStateCompat.of(level.getBlockState(downPos)).is(Blocks.SUGAR_CANE)) {
-            downPos = downPos.below();
-            height++;
+        while (BlockStateCompat.of(Silian_level.getBlockState(Silian_downPos)).is(Blocks.SUGAR_CANE)) {
+            Silian_downPos = Silian_downPos.below();
+            Silian_height++;
         }
 
         // 甘蔗最多长 3 格
-        if (height < 3) {
-            BlockPos sugarCanePos = upPos.below();
-            BlockState blockState = level.getBlockState(sugarCanePos);
+        if (Silian_height < 3) {
+            BlockPos Silian_sugarCanePos = Silian_upPos.below();
+            BlockState Silian_blockState = Silian_level.getBlockState(Silian_sugarCanePos);
 
-            int age = blockState.getValue(SugarCaneBlock.AGE);
-            if (age == 15) {
-                level.setBlockAndUpdate(upPos, Blocks.SUGAR_CANE.defaultBlockState());
-                level.setBlock(sugarCanePos, blockState.setValue(SugarCaneBlock.AGE, 0), 4);
+            int Silian_age = Silian_blockState.getValue(SugarCaneBlock.AGE);
+            if (Silian_age == 15) {
+                Silian_level.setBlockAndUpdate(Silian_upPos, Blocks.SUGAR_CANE.defaultBlockState());
+                Silian_level.setBlock(Silian_sugarCanePos, Silian_blockState.setValue(SugarCaneBlock.AGE, 0), 4);
             } else {
-                age = Math.min(15, age + level.random.nextInt(16));
-                level.setBlock(sugarCanePos, blockState.setValue(SugarCaneBlock.AGE, age), 4);
+                Silian_age = Math.min(15, Silian_age + Silian_level.random.nextInt(16));
+                Silian_level.setBlock(Silian_sugarCanePos, Silian_blockState.setValue(SugarCaneBlock.AGE, Silian_age), 4);
             }
-            itemStack.shrink(1);
+            Silian_itemStack.shrink(1);
             return true;
         } else {
             return false;

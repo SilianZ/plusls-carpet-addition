@@ -21,15 +21,15 @@ import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.EntityCompat;
 @Mixin(SpectralArrow.class)
 public abstract class MixinSpectralArrow extends AbstractArrow {
     private MixinSpectralArrow(
-            EntityType<? extends AbstractArrow> entityType,
-            Level world
+            EntityType<? extends AbstractArrow> Silian_entityType,
+            Level Silian_world
             //#if 12006 > MC && MC > 12002
             //$$ , ItemStack itemStack
             //#endif
     ) {
         super(
-                entityType,
-                world
+                Silian_entityType,
+                Silian_world
                 //#if 12006 > MC && MC > 12002
                 //$$ , itemStack
                 //#endif
@@ -42,18 +42,18 @@ public abstract class MixinSpectralArrow extends AbstractArrow {
                     value = "RETURN"
             )
     )
-    private void forceRestock(LivingEntity target, CallbackInfo ci) {
-        Level levelCompat = EntityCompat.of(target).getLevel();
+    private void forceRestock(LivingEntity Silian_target, CallbackInfo Silian_ci) {
+        Level Silian_levelCompat = EntityCompat.of(Silian_target).getLevel();
 
-        if (PluslsCarpetAdditionSettings.forceRestock && !levelCompat.isClientSide && target instanceof AbstractVillager) {
-            AbstractVillager villager = (AbstractVillager) target;
+        if (PluslsCarpetAdditionSettings.forceRestock && !Silian_levelCompat.isClientSide && Silian_target instanceof AbstractVillager) {
+            AbstractVillager Silian_villager = (AbstractVillager) Silian_target;
 
-            for (MerchantOffer tradeOffer : villager.getOffers()) {
-                tradeOffer.resetUses();
+            for (MerchantOffer Silian_tradeOffer : Silian_villager.getOffers()) {
+                Silian_tradeOffer.resetUses();
             }
 
             // make villager happy ~
-            levelCompat.broadcastEntityEvent(villager, (byte) 14);
+            Silian_levelCompat.broadcastEntityEvent(Silian_villager, (byte) 14);
         }
     }
 }

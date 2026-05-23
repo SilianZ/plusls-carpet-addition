@@ -35,8 +35,8 @@ public class MixinSkullBlockEntity implements GravesStoneSkullBlockEntity {
     }
 
     @Override
-    public void pca$setDeathInfo(DeathInfo deathInfo) {
-        this.pca$deathInfo = deathInfo;
+    public void pca$setDeathInfo(DeathInfo Silian_deathInfo) {
+        this.pca$deathInfo = Silian_deathInfo;
     }
 
     @Inject(
@@ -51,17 +51,17 @@ public class MixinSkullBlockEntity implements GravesStoneSkullBlockEntity {
     )
     private void postLoad(
             //#if MC > 11502 && MC < 11700
-            BlockState blockState,
+            BlockState Silian_blockState,
             //#endif
-            @NotNull CompoundTag compoundTag,
+            @NotNull CompoundTag Silian_compoundTag,
             //#if MC > 12004
             //$$ HolderLookup.Provider provider,
             //#endif
-            CallbackInfo ci
+            CallbackInfo Silian_ci
     ) {
-        if (compoundTag.contains("DeathInfo", TagCompat.TAG_COMPOUND)) {
+        if (Silian_compoundTag.contains("DeathInfo", TagCompat.TAG_COMPOUND)) {
             this.pca$deathInfo = DeathInfo.fromTag(
-                    compoundTag.getCompound("DeathInfo")
+                    Silian_compoundTag.getCompound("DeathInfo")
                     //#if MC > 12004
                     //$$ , provider
                     //#endif
@@ -80,18 +80,18 @@ public class MixinSkullBlockEntity implements GravesStoneSkullBlockEntity {
             )
     )
     private void postSave(
-            CompoundTag compoundTag,
+            CompoundTag Silian_compoundTag,
             //#if MC > 12004
             //$$ HolderLookup.Provider provider,
             //#endif
             //#if MC > 11701
-            //$$ CallbackInfo ci
+            //$$ CallbackInfo Silian_ci
             //#else
-            CallbackInfoReturnable<CompoundTag> cir
+            CallbackInfoReturnable<CompoundTag> Silian_cir
             //#endif
     ) {
         if (this.pca$deathInfo != null) {
-            compoundTag.put("DeathInfo", this.pca$deathInfo.toTag(
+            Silian_compoundTag.put("DeathInfo", this.pca$deathInfo.toTag(
                     //#if MC > 12004
                     //$$ provider
                     //#endif

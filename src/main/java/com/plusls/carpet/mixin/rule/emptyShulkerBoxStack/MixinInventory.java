@@ -20,8 +20,8 @@ public abstract class MixinInventory implements Container, Nameable {
                     ordinal = 0
             )
     )
-    private boolean canStackAddMoreIsStackable(ItemStack itemStack) {
-        return ShulkerBoxItemUtil.isStackable(itemStack);
+    private boolean canStackAddMoreIsStackable(ItemStack Silian_itemStack) {
+        return ShulkerBoxItemUtil.isStackable(Silian_itemStack);
     }
 
     @Redirect(
@@ -39,9 +39,9 @@ public abstract class MixinInventory implements Container, Nameable {
             //#if MC > 12004
             //$$ Inventory instance,
             //#endif
-            ItemStack itemStack
+            ItemStack Silian_itemStack
     ) {
-        return ShulkerBoxItemUtil.getMaxCount(itemStack);
+        return ShulkerBoxItemUtil.getMaxCount(Silian_itemStack);
     }
 
     @Redirect(
@@ -59,9 +59,9 @@ public abstract class MixinInventory implements Container, Nameable {
             //#if MC > 12004
             //$$ Inventory instance,
             //#endif
-            ItemStack itemStack
+            ItemStack Silian_itemStack
     ) {
-        return ShulkerBoxItemUtil.getMaxCount(itemStack);
+        return ShulkerBoxItemUtil.getMaxCount(Silian_itemStack);
     }
 
     // 避免死循环
@@ -77,7 +77,7 @@ public abstract class MixinInventory implements Container, Nameable {
                     ordinal = 0
             )
     )
-    private int offerGetMaxCount(ItemStack itemStack) {
-        return ShulkerBoxItemUtil.getMaxCount(itemStack);
+    private int offerGetMaxCount(ItemStack Silian_itemStack) {
+        return ShulkerBoxItemUtil.getMaxCount(Silian_itemStack);
     }
 }

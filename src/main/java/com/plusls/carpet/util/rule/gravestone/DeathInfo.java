@@ -28,39 +28,39 @@ public class DeathInfo {
     //#endif
 
     public DeathInfo(
-            long deathTime,
-            int xp,
+            long Silian_deathTime,
+            int Silian_xp,
             //#if MC > 11502
-            SimpleContainer inv
+            SimpleContainer Silian_inv
             //#else
-            //$$ List<ItemStack> inv
+            //$$ List<ItemStack> Silian_inv
             //#endif
     ) {
-        this.deathTime = deathTime;
-        this.xp = xp;
-        this.inventory = inv;
+        this.deathTime = Silian_deathTime;
+        this.xp = Silian_xp;
+        this.inventory = Silian_inv;
     }
 
     public static @NotNull DeathInfo fromTag(
-            @NotNull CompoundTag tag
+            @NotNull CompoundTag Silian_tag
             //#if MC > 12004
             //$$ , HolderLookup.Provider provider
             //#endif
     ) {
-        long deathTime = tag.getLong("DeathTime");
-        int xp = tag.getInt("XP");
+        long Silian_deathTime = Silian_tag.getLong("DeathTime");
+        int Silian_xp = Silian_tag.getInt("XP");
         //#if MC > 11502
-        SimpleContainer inventory = new SimpleContainer(GravestoneUtil.PLAYER_INVENTORY_SIZE);
-        inventory.fromTag(
-                tag.getList("Items", TagCompat.TAG_COMPOUND)
+        SimpleContainer Silian_inventory = new SimpleContainer(GravestoneUtil.PLAYER_INVENTORY_SIZE);
+        Silian_inventory.fromTag(
+                Silian_tag.getList("Items", TagCompat.TAG_COMPOUND)
                 //#if MC > 12004
                 //$$ , provider
                 //#endif
         );
         //#else
-        //$$ List<ItemStack> inventory = DeathInfo.readTagList(tag.getList("Items", TagCompat.TAG_COMPOUND));
+        //$$ List<ItemStack> Silian_inventory = DeathInfo.readTagList(Silian_tag.getList("Items", TagCompat.TAG_COMPOUND));
         //#endif
-        return new DeathInfo(deathTime, xp, inventory);
+        return new DeathInfo(Silian_deathTime, Silian_xp, Silian_inventory);
     }
 
     public CompoundTag toTag(
@@ -68,10 +68,10 @@ public class DeathInfo {
             //$$ HolderLookup.Provider provider
             //#endif
     ) {
-        CompoundTag tag = new CompoundTag();
-        tag.putLong("DeathTime", this.deathTime);
-        tag.putInt("XP", this.xp);
-        tag.put(
+        CompoundTag Silian_tag = new CompoundTag();
+        Silian_tag.putLong("DeathTime", this.deathTime);
+        Silian_tag.putInt("XP", this.xp);
+        Silian_tag.put(
                 "Items",
                 //#if MC > 11502
                 this.inventory.createTag(
@@ -83,34 +83,34 @@ public class DeathInfo {
                 //$$ DeathInfo.toTagList(this.inventory)
                 //#endif
         );
-        return tag;
+        return Silian_tag;
     }
 
     //#if MC < 11600
-    //$$ private static List<ItemStack> readTagList(@NotNull ListTag listTag) {
-    //$$     List<ItemStack> ret = Lists.newArrayList();
+    //$$ private static List<ItemStack> readTagList(@NotNull ListTag Silian_listTag) {
+    //$$     List<ItemStack> Silian_ret = Lists.newArrayList();
     //$$
-    //$$     for (int i = 0; i < listTag.size(); i++) {
-    //$$         ItemStack itemStack = ItemStack.of(listTag.getCompound(i));
+    //$$     for (int Silian_i = 0; Silian_i < Silian_listTag.size(); Silian_i++) {
+    //$$         ItemStack Silian_itemStack = ItemStack.of(Silian_listTag.getCompound(Silian_i));
     //$$
-    //$$         if (!itemStack.isEmpty()) {
-    //$$             ret.add(itemStack);
+    //$$         if (!Silian_itemStack.isEmpty()) {
+    //$$             Silian_ret.add(Silian_itemStack);
     //$$         }
     //$$     }
     //$$
-    //$$     return ret;
+    //$$     return Silian_ret;
     //$$ }
     //$$
-    //$$ public static @NotNull ListTag toTagList(@NotNull List<ItemStack> inventory) {
-    //$$     ListTag ret = new ListTag();
+    //$$ public static @NotNull ListTag toTagList(@NotNull List<ItemStack> Silian_inventory) {
+    //$$     ListTag Silian_ret = new ListTag();
     //$$
-    //$$     for (ItemStack itemStack : inventory) {
-    //$$         if (!itemStack.isEmpty()) {
-    //$$             ret.add(itemStack.save(new CompoundTag()));
+    //$$     for (ItemStack Silian_itemStack : Silian_inventory) {
+    //$$         if (!Silian_itemStack.isEmpty()) {
+    //$$             Silian_ret.add(Silian_itemStack.save(new CompoundTag()));
     //$$         }
     //$$     }
     //$$
-    //$$     return ret;
+    //$$     return Silian_ret;
     //$$ }
     //#endif
 }

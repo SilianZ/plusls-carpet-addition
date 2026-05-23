@@ -24,13 +24,13 @@ public abstract class MixinVillager extends AbstractVillager implements MyVillag
     @Shadow
     private boolean increaseProfessionLevelOnUpdate;
 
-    public MixinVillager(EntityType<? extends AbstractVillager> entityType, Level world) {
-        super(entityType, world);
+    public MixinVillager(EntityType<? extends AbstractVillager> Silian_entityType, Level Silian_world) {
+        super(Silian_entityType, Silian_world);
     }
 
     @Override
-    public void pca$tradeWithoutPlayer(@NotNull MerchantOffer offer) {
-        this.villagerXp += offer.getXp();
+    public void pca$tradeWithoutPlayer(@NotNull MerchantOffer Silian_offer) {
+        this.villagerXp += Silian_offer.getXp();
         if (this.shouldIncreaseLevel()) {
             this.updateMerchantTimer = 40;
             this.increaseProfessionLevelOnUpdate = true;

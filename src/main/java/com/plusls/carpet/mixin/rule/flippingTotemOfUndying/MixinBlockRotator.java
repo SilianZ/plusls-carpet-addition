@@ -22,8 +22,8 @@ import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.player.PlayerC
 @Mixin(BlockRotator.class)
 public class MixinBlockRotator {
     @Unique
-    private static boolean pca$playerHoldsTotemOfUndyingMainHand(@NotNull Player player) {
-        return player.getMainHandItem().getItem() == Items.TOTEM_OF_UNDYING;
+    private static boolean pca$playerHoldsTotemOfUndyingMainHand(@NotNull Player Silian_player) {
+        return Silian_player.getMainHandItem().getItem() == Items.TOTEM_OF_UNDYING;
     }
 
     @Inject(
@@ -34,15 +34,15 @@ public class MixinBlockRotator {
             cancellable = true,
             remap = false
     )
-    private static void postFlipBlockWithCactus(BlockState state, Level level, Player player, InteractionHand hand, BlockHitResult hit, @NotNull CallbackInfoReturnable<Boolean> cir) {
+    private static void postFlipBlockWithCactus(BlockState Silian_state, Level Silian_level, Player Silian_player, InteractionHand Silian_hand, BlockHitResult Silian_hit, @NotNull CallbackInfoReturnable<Boolean> Silian_cir) {
         // 不知道为什么 同一 gt 内会收到 2 个包
         // it works
-        if (!cir.getReturnValue() && PluslsCarpetAdditionSettings.flippingTotemOfUndying &&
-                level.getGameTime() != FlipCooldown.getCoolDown(player)) {
+        if (!Silian_cir.getReturnValue() && PluslsCarpetAdditionSettings.flippingTotemOfUndying &&
+                Silian_level.getGameTime() != FlipCooldown.getCoolDown(Silian_player)) {
             // 能修改世界且副手为空
-            if (!PlayerCompat.of(player).getAbilities().mayBuild ||
-                    !pca$playerHoldsTotemOfUndyingMainHand(player) ||
-                    !player.getOffhandItem().isEmpty()) {
+            if (!PlayerCompat.of(Silian_player).getAbilities().mayBuild ||
+                    !pca$playerHoldsTotemOfUndyingMainHand(Silian_player) ||
+                    !Silian_player.getOffhandItem().isEmpty()) {
                 return;
             }
 
@@ -51,18 +51,18 @@ public class MixinBlockRotator {
             //#else
             //$$ CarpetSettings.impendingFillSkipUpdates = true;
             //#endif
-            boolean ret = BlockRotator.flip_block(state, level, player, hand, hit);
+            boolean Silian_ret = BlockRotator.flip_block(Silian_state, Silian_level, Silian_player, Silian_hand, Silian_hit);
             //#if MC > 11502
             CarpetSettings.impendingFillSkipUpdates.set(false);
             //#else
             //$$ CarpetSettings.impendingFillSkipUpdates = false;
             //#endif
 
-            if (ret) {
-                FlipCooldown.setCoolDown(player, level.getGameTime());
+            if (Silian_ret) {
+                FlipCooldown.setCoolDown(Silian_player, Silian_level.getGameTime());
             }
 
-            cir.setReturnValue(ret);
+            Silian_cir.setReturnValue(Silian_ret);
         }
     }
 
@@ -74,12 +74,12 @@ public class MixinBlockRotator {
             cancellable = true,
             remap = false
     )
-    private static void postFlippinEligibility(Entity entity, @NotNull CallbackInfoReturnable<Boolean> cir) {
-        if (!cir.getReturnValue() && PluslsCarpetAdditionSettings.flippingTotemOfUndying && (entity instanceof Player)) {
-            Player player = (Player) entity;
+    private static void postFlippinEligibility(Entity Silian_entity, @NotNull CallbackInfoReturnable<Boolean> Silian_cir) {
+        if (!Silian_cir.getReturnValue() && PluslsCarpetAdditionSettings.flippingTotemOfUndying && (Silian_entity instanceof Player)) {
+            Player Silian_player = (Player) Silian_entity;
             // 副手不为空，主手为图腾
-            boolean ret = !player.getOffhandItem().isEmpty() && pca$playerHoldsTotemOfUndyingMainHand(player);
-            cir.setReturnValue(ret);
+            boolean Silian_ret = !Silian_player.getOffhandItem().isEmpty() && pca$playerHoldsTotemOfUndyingMainHand(Silian_player);
+            Silian_cir.setReturnValue(Silian_ret);
         }
     }
 }

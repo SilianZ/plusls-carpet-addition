@@ -22,8 +22,8 @@ import java.util.Random;
 
 @Mixin(LeavesBlock.class)
 public abstract class MixinLeavesBlock extends Block {
-    public MixinLeavesBlock(Properties settings) {
-        super(settings);
+    public MixinLeavesBlock(Properties Silian_settings) {
+        super(Silian_settings);
     }
 
     @SuppressWarnings("deprecation")
@@ -34,14 +34,14 @@ public abstract class MixinLeavesBlock extends Block {
             )
     )
     //#if MC > 11802
-    //$$ private void postScheduledTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+    //$$ private void postScheduledTick(BlockState Silian_state, ServerLevel Silian_level, BlockPos Silian_pos, RandomSource Silian_random, CallbackInfo Silian_ci) {
     //#elseif MC > 11404
-    private void postScheduledTick(BlockState state, ServerLevel level, BlockPos pos, Random random, CallbackInfo ci) {
+    private void postScheduledTick(BlockState Silian_state, ServerLevel Silian_level, BlockPos Silian_pos, Random Silian_random, CallbackInfo Silian_ci) {
     //#else
-    //$$ private void postScheduledTick(BlockState state, Level level, BlockPos pos, Random random, CallbackInfo ci) {
+    //$$ private void postScheduledTick(BlockState Silian_state, Level Silian_level, BlockPos Silian_pos, Random Silian_random, CallbackInfo Silian_ci) {
     //#endif
         if (PluslsCarpetAdditionSettings.quickLeafDecay) {
-            this.randomTick(state, level, pos, random);
+            this.randomTick(Silian_state, Silian_level, Silian_pos, Silian_random);
         }
     }
 }

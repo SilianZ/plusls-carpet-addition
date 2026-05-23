@@ -13,8 +13,8 @@ import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.EntityCompat;
 
 @Mixin(ArmorStand.class)
 public abstract class MixinArmorStand extends LivingEntity {
-    protected MixinArmorStand(EntityType<? extends LivingEntity> entityType, Level world) {
-        super(entityType, world);
+    protected MixinArmorStand(EntityType<? extends LivingEntity> Silian_entityType, Level Silian_world) {
+        super(Silian_entityType, Silian_world);
     }
 
     @Redirect(
@@ -25,11 +25,11 @@ public abstract class MixinArmorStand extends LivingEntity {
                     ordinal = 0
             )
     )
-    private boolean redirectIsSourceCreativePlayer(DamageSource instance) {
+    private boolean redirectIsSourceCreativePlayer(DamageSource Silian_instance) {
         if (!EntityCompat.of(this).getLevel().isClientSide() && PluslsCarpetAdditionSettings.creativePlayerNoDirectKillArmorStand) {
             return false;
         }
 
-        return instance.isCreativePlayer();
+        return Silian_instance.isCreativePlayer();
     }
 }

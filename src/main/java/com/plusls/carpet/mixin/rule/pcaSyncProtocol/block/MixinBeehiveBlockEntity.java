@@ -35,17 +35,17 @@ import net.minecraft.world.level.block.state.BlockState;
 @Mixin(BeehiveBlockEntity.class)
 public abstract class MixinBeehiveBlockEntity extends BlockEntity {
     private MixinBeehiveBlockEntity(
-            BlockEntityType<?> blockEntityType
+            BlockEntityType<?> Silian_blockEntityType
             //#if MC > 11605
             //$$ , BlockPos blockPos
-            //$$ , BlockState blockState
+            //$$ , BlockState Silian_blockState
             //#endif
     ) {
         super(
-                blockEntityType
+                Silian_blockEntityType
                 //#if MC > 11605
                 //$$ , blockPos
-                //$$ , blockState
+                //$$ , Silian_blockState
                 //#endif
         );
     }
@@ -66,11 +66,11 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity {
             //#if MC > 11605
             //$$ Level level,
             //$$ BlockPos blockPos,
-            //$$ BlockState blockState,
+            //$$ BlockState Silian_blockState,
             //$$ List<BeehiveBlockEntity.BeeData> bees,
             //$$ BlockPos flowerPos,
             //#endif
-            CallbackInfo ci
+            CallbackInfo Silian_ci
     ) {
         if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(
                 //#if MC > 11605
@@ -96,8 +96,8 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity {
                     value = "RETURN"
             )
     )
-    public void postReleaseAllOccupants(CallbackInfoReturnable<List<Entity>> cir) {
-        if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this) && cir.getReturnValue() != null) {
+    public void postReleaseAllOccupants(CallbackInfoReturnable<List<Entity>> Silian_cir) {
+        if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this) && Silian_cir.getReturnValue() != null) {
             PluslsCarpetAdditionReference.getLogger().debug("update BeehiveBlockEntity: {}", this.worldPosition);
         }
     }
@@ -114,13 +114,13 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity {
     )
     public void postLoad(
             //#if MC > 11502 && MC < 11700
-            BlockState blockState,
+            BlockState Silian_blockState,
             //#endif
-            @NotNull CompoundTag compoundTag,
+            @NotNull CompoundTag Silian_compoundTag,
             //#if MC > 12004
             //$$ HolderLookup.Provider provider,
             //#endif
-            CallbackInfo ci
+            CallbackInfo Silian_ci
     ) {
         if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
             PluslsCarpetAdditionReference.getLogger().debug("update BeehiveBlockEntity: {}", this.worldPosition);
@@ -144,7 +144,7 @@ public abstract class MixinBeehiveBlockEntity extends BlockEntity {
                     ordinal = 0
             )
     )
-    public void postAddOccupantWithPresetTicks(CallbackInfo ci) {
+    public void postAddOccupantWithPresetTicks(CallbackInfo Silian_ci) {
         if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
             PluslsCarpetAdditionReference.getLogger().debug("update BeehiveBlockEntity: {}", this.worldPosition);
         }

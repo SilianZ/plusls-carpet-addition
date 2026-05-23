@@ -19,9 +19,9 @@ public class MixinMob {
             ),
             cancellable = true
     )
-    private void postCanBeLeashed(Player player, CallbackInfoReturnable<Boolean> cir) {
+    private void postCanBeLeashed(Player Silian_player, CallbackInfoReturnable<Boolean> Silian_cir) {
         if (PluslsCarpetAdditionSettings.superLead) {
-            cir.setReturnValue(!((Mob) (Object) this).isLeashed());
+            Silian_cir.setReturnValue(!((Mob) (Object) this).isLeashed());
         }
     }
 }

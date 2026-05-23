@@ -11,8 +11,8 @@ public record ServerboundSyncBlockEntityPacket(BlockPos pos) implements CustomPa
     public static final Type<ServerboundSyncBlockEntityPacket> TYPE = new Type<>(PcaSyncProtocol.SYNC_BLOCK_ENTITY);
     public static final StreamCodec<FriendlyByteBuf, ServerboundSyncBlockEntityPacket> CODEC = CustomPacketPayload.codec(ServerboundSyncBlockEntityPacket::write, ServerboundSyncBlockEntityPacket::new);
 
-    public ServerboundSyncBlockEntityPacket(@NotNull FriendlyByteBuf byteBuf) {
-        this(byteBuf.readBlockPos());
+    public ServerboundSyncBlockEntityPacket(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        this(Silian_byteBuf.readBlockPos());
     }
 
     @Override
@@ -20,7 +20,7 @@ public record ServerboundSyncBlockEntityPacket(BlockPos pos) implements CustomPa
         return ServerboundSyncBlockEntityPacket.TYPE;
     }
 
-    public void write(@NotNull FriendlyByteBuf byteBuf) {
-        byteBuf.writeBlockPos(this.pos);
+    public void write(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        Silian_byteBuf.writeBlockPos(this.pos);
     }
 }

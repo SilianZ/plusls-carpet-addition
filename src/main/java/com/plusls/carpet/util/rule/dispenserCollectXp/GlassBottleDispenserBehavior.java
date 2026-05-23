@@ -24,8 +24,8 @@ import net.minecraft.core.BlockSource;
 public class GlassBottleDispenserBehavior extends MyFallibleItemDispenserBehavior {
     private final DefaultDispenseItemBehavior fallbackBehavior = new DefaultDispenseItemBehavior();
 
-    public GlassBottleDispenserBehavior(DispenseItemBehavior oldDispenserBehavior) {
-        super(oldDispenserBehavior);
+    public GlassBottleDispenserBehavior(DispenseItemBehavior Silian_oldDispenserBehavior) {
+        super(Silian_oldDispenserBehavior);
     }
 
     public static void init() {
@@ -33,61 +33,61 @@ public class GlassBottleDispenserBehavior extends MyFallibleItemDispenserBehavio
                 new GlassBottleDispenserBehavior(DispenserBlock.DISPENSER_REGISTRY.get(Items.GLASS_BOTTLE)));
     }
 
-    private ItemStack replaceItem(BlockSource pointer, ItemStack oldItem, ItemStack newItem) {
-        oldItem.shrink(1);
+    private ItemStack replaceItem(BlockSource Silian_pointer, ItemStack Silian_oldItem, ItemStack Silian_newItem) {
+        Silian_oldItem.shrink(1);
 
-        if (oldItem.isEmpty()) {
-            return newItem.copy();
+        if (Silian_oldItem.isEmpty()) {
+            return Silian_newItem.copy();
         }
 
         if (
                 //#if MC > 12006
-                //$$ !pointer.blockEntity().insertItem(newItem.copy()).isEmpty()
+                //$$ !Silian_pointer.blockEntity().insertItem(Silian_newItem.copy()).isEmpty()
                 //#else
-                ((DispenserBlockEntity) pointer.getEntity()).addItem(newItem.copy()) < 0
+                ((DispenserBlockEntity) Silian_pointer.getEntity()).addItem(Silian_newItem.copy()) < 0
                 //#endif
         ) {
-            this.fallbackBehavior.dispense(pointer, newItem.copy());
+            this.fallbackBehavior.dispense(Silian_pointer, Silian_newItem.copy());
         }
 
-        return oldItem;
+        return Silian_oldItem;
     }
 
     @Override
-    public ItemStack dispenseSilently(BlockSource pointer, ItemStack itemStack) {
+    public ItemStack dispenseSilently(BlockSource Silian_pointer, ItemStack Silian_itemStack) {
         if (!PluslsCarpetAdditionSettings.dispenserCollectXp) {
-            return itemStack;
+            return Silian_itemStack;
         }
-        BlockPos faceBlockPos = pointer.getPos().relative(pointer.getBlockState().getValue(DispenserBlock.FACING));
+        BlockPos Silian_faceBlockPos = Silian_pointer.getPos().relative(Silian_pointer.getBlockState().getValue(DispenserBlock.FACING));
 
-        List<ExperienceOrb> xpEntityList = pointer.getLevel().getEntitiesOfClass(ExperienceOrb.class,
-                new AABB(faceBlockPos), Entity::isAlive);
+        List<ExperienceOrb> Silian_xpEntityList = Silian_pointer.getLevel().getEntitiesOfClass(ExperienceOrb.class,
+                new AABB(Silian_faceBlockPos), Entity::isAlive);
 
-        int currentXp = 0;
+        int Silian_currentXp = 0;
         // 运算次数不多，所以多循环几次也无所谓（放弃思考.jpg
-        for (ExperienceOrb xpEntity : xpEntityList) {
+        for (ExperienceOrb Silian_xpEntity : Silian_xpEntityList) {
             //#if MC > 11605
-            //$$ for (; xpEntity.count > 0; --xpEntity.count) {
+            //$$ for (; Silian_xpEntity.count > 0; --Silian_xpEntity.count) {
             //#else
-            for (; xpEntity.value > 0; --xpEntity.value) {
+            for (; Silian_xpEntity.value > 0; --Silian_xpEntity.value) {
             //#endif
-                currentXp += xpEntity.getValue();
+                Silian_currentXp += Silian_xpEntity.getValue();
                 // 有残留经验也无所谓，直接把经验球销毁
                 // 付出点代价很合理
                 //#if MC > 11605
-                //$$ if (xpEntity.count == 1) {
-                //$$     xpEntity.discard();
+                //$$ if (Silian_xpEntity.count == 1) {
+                //$$     Silian_xpEntity.discard();
                 //#else
-                if (xpEntity.value == 1) {
-                    xpEntity.remove();
+                if (Silian_xpEntity.value == 1) {
+                    Silian_xpEntity.remove();
                 //#endif
                 }
-                if (currentXp >= 8) {
+                if (Silian_currentXp >= 8) {
                     setSuccess(true);
-                    return this.replaceItem(pointer, itemStack, new ItemStack(Items.EXPERIENCE_BOTTLE));
+                    return this.replaceItem(Silian_pointer, Silian_itemStack, new ItemStack(Items.EXPERIENCE_BOTTLE));
                 }
             }
         }
-        return itemStack;
+        return Silian_itemStack;
     }
 }

@@ -33,18 +33,18 @@ public abstract class MixinAnvilMenu
 {
     private MixinAnvilMenu(
             //#if MC > 11502
-            @Nullable MenuType<?> type,
-            int containerId,
-            Inventory playerInventory,
-            ContainerLevelAccess access
+            @Nullable MenuType<?> Silian_type,
+            int Silian_containerId,
+            Inventory Silian_playerInventory,
+            ContainerLevelAccess Silian_access
             //#endif
     ) {
         super(
                 //#if MC > 11502
-                type,
-                containerId,
-                playerInventory,
-                access
+                Silian_type,
+                Silian_containerId,
+                Silian_playerInventory,
+                Silian_access
                 //#endif
         );
     }
@@ -74,29 +74,29 @@ public abstract class MixinAnvilMenu
             ),
             ordinal = 1
     )
-    private ItemStack setItemStack(ItemStack itemStack) {
+    private ItemStack setItemStack(ItemStack Silian_itemStack) {
         //#if MC > 11502
-        ItemStack itemStackA = this.inputSlots.getItem(0);
-        ItemStack itemStackB = this.inputSlots.getItem(1);
+        ItemStack Silian_itemStackA = this.inputSlots.getItem(0);
+        ItemStack Silian_itemStackB = this.inputSlots.getItem(1);
         //#else
-        //$$ ItemStack itemStackA = this.repairSlots.getItem(0);
-        //$$ ItemStack itemStackB = this.repairSlots.getItem(1);
+        //$$ ItemStack Silian_itemStackA = this.repairSlots.getItem(0);
+        //$$ ItemStack Silian_itemStackB = this.repairSlots.getItem(1);
         //#endif
 
-        if (PluslsCarpetAdditionSettings.avoidAnvilTooExpensive && itemStack.isEmpty() && !itemStackA.isEmpty() &&
-                (!itemStackB.isEmpty() ||
+        if (PluslsCarpetAdditionSettings.avoidAnvilTooExpensive && Silian_itemStack.isEmpty() && !Silian_itemStackA.isEmpty() &&
+                (!Silian_itemStackB.isEmpty() ||
                         (StringUtils.isBlank(this.itemName) &&
                                 //#if MC > 12004
-                                //$$ itemStackA.has(DataComponents.CUSTOM_NAME)
+                                //$$ Silian_itemStackA.has(DataComponents.CUSTOM_NAME)
                                 //#else
-                                itemStackA.hasCustomHoverName()
+                                Silian_itemStackA.hasCustomHoverName()
                                 //#endif
                         ) ||
-                        (!StringUtils.isBlank(this.itemName) && !this.itemName.equals(itemStackA.getHoverName().getString())))
+                        (!StringUtils.isBlank(this.itemName) && !this.itemName.equals(Silian_itemStackA.getHoverName().getString())))
         ) {
-            return itemStackA.copy();
+            return Silian_itemStackA.copy();
         } else {
-            return itemStack;
+            return Silian_itemStack;
         }
     }
 }

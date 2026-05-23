@@ -27,23 +27,23 @@ import top.hendrixshen.magiclib.util.MessageUtil;
 @Mixin(ServerPlayer.class)
 public abstract class MixinServerPlayer extends Player {
     private MixinServerPlayer(
-            Level level,
+            Level Silian_level,
             //#if MC > 11502
-            BlockPos blockPos,
-            float f,
+            BlockPos Silian_blockPos,
+            float Silian_f,
             //#endif
-            GameProfile gameProfile
+            GameProfile Silian_gameProfile
             //#if 11903 > MC && MC > 11802
             //$$ , @Nullable ProfilePublicKey profilePublicKey
             //#endif
     ) {
         super(
-                level,
+                Silian_level,
                 //#if MC > 11502
-                blockPos,
-                f,
+                Silian_blockPos,
+                Silian_f,
                 //#endif
-                gameProfile
+                Silian_gameProfile
                 //#if 11903 > MC && MC > 11802
                 //$$ , profilePublicKey
                 //#endif
@@ -62,8 +62,8 @@ public abstract class MixinServerPlayer extends Player {
 
     @Override
     @Intrinsic
-    public void setShiftKeyDown(boolean sneaking) {
-        super.setShiftKeyDown(sneaking);
+    public void setShiftKeyDown(boolean Silian_sneaking) {
+        super.setShiftKeyDown(Silian_sneaking);
     }
 
     @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference", "target"})
@@ -78,34 +78,34 @@ public abstract class MixinServerPlayer extends Player {
             ),
             cancellable = true
     )
-    private void customSetShiftKeyDownCheck(boolean sneaking, CallbackInfo ci) {
+    private void customSetShiftKeyDownCheck(boolean Silian_sneaking, CallbackInfo Silian_ci) {
         // Not handled when sneak state doesn't change
-        if (!PluslsCarpetAdditionSettings.playerSit || (sneaking && this.isShiftKeyDown())) {
+        if (!PluslsCarpetAdditionSettings.playerSit || (Silian_sneaking && this.isShiftKeyDown())) {
             return;
         }
 
-        if (sneaking) {
-            long nowTime = Util.getMillis();
-            PlayerCompat playerCompat = PlayerCompat.of(this);
+        if (Silian_sneaking) {
+            long Silian_nowTime = Util.getMillis();
+            PlayerCompat Silian_playerCompat = PlayerCompat.of(this);
 
             // Every sneak interval must not be over 0.2s
-            if (nowTime - this.pca$lastSneakTime > 200) {
+            if (Silian_nowTime - this.pca$lastSneakTime > 200) {
                 this.pca$sneakTimes = 0;
             } else {
                 // Block input update for 0.2s after player sit
-                ci.cancel();
+                Silian_ci.cancel();
             }
 
-            if (playerCompat.isOnGround()) {
+            if (Silian_playerCompat.isOnGround()) {
                 this.pca$sneakTimes++;
             }
 
-            this.pca$lastSneakTime = nowTime;
+            this.pca$lastSneakTime = Silian_nowTime;
 
             if (this.pca$sneakTimes > 2) {
-                ArmorStand armorStandEntity = new ArmorStand(playerCompat.getLevel(), playerCompat.getX(), playerCompat.getY() - 0.16, playerCompat.getZ());
-                ((SitEntity) armorStandEntity).pca$setSitEntity(true);
-                playerCompat.getLevel().addFreshEntity(armorStandEntity);
+                ArmorStand Silian_armorStandEntity = new ArmorStand(Silian_playerCompat.getLevel(), Silian_playerCompat.getX(), Silian_playerCompat.getY() - 0.16, Silian_playerCompat.getZ());
+                ((SitEntity) Silian_armorStandEntity).pca$setSitEntity(true);
+                Silian_playerCompat.getLevel().addFreshEntity(Silian_armorStandEntity);
                 this.setShiftKeyDown(false);
 
                 if (this.connection != null) {
@@ -120,9 +120,9 @@ public abstract class MixinServerPlayer extends Player {
                     ));
                 }
 
-                this.startRiding(armorStandEntity);
+                this.startRiding(Silian_armorStandEntity);
                 this.pca$sneakTimes = 0;
-                ci.cancel();
+                Silian_ci.cancel();
             }
         }
     }
