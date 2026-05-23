@@ -14,8 +14,8 @@ public record ClientboundUpdateBlockEntityPacket(ResourceLocation dimension, Blo
     public static final Type<ClientboundUpdateBlockEntityPacket> TYPE = new Type<>(PcaSyncProtocol.UPDATE_BLOCK_ENTITY);
     public static final StreamCodec<FriendlyByteBuf, ClientboundUpdateBlockEntityPacket> CODEC = CustomPacketPayload.codec(ClientboundUpdateBlockEntityPacket::write, ClientboundUpdateBlockEntityPacket::new);
 
-    public ClientboundUpdateBlockEntityPacket(@NotNull FriendlyByteBuf byteBuf) {
-        this(byteBuf.readResourceLocation(), byteBuf.readBlockPos(), NetworkUtil.readNbt(byteBuf));
+    public ClientboundUpdateBlockEntityPacket(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        this(Silian_byteBuf.readResourceLocation(), Silian_byteBuf.readBlockPos(), NetworkUtil.readNbt(Silian_byteBuf));
     }
 
     @Override
@@ -23,9 +23,9 @@ public record ClientboundUpdateBlockEntityPacket(ResourceLocation dimension, Blo
         return ClientboundUpdateBlockEntityPacket.TYPE;
     }
 
-    private void write(@NotNull FriendlyByteBuf byteBuf) {
-        byteBuf.writeResourceLocation(this.dimension);
-        byteBuf.writeBlockPos(this.blockPos);
-        byteBuf.writeNbt(this.tag);
+    private void write(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        Silian_byteBuf.writeResourceLocation(this.dimension);
+        Silian_byteBuf.writeBlockPos(this.blockPos);
+        Silian_byteBuf.writeNbt(this.tag);
     }
 }

@@ -25,24 +25,24 @@ public class MixinPlayerList {
             at = @At(value = "RETURN"
             )
     )
-    public void preOnSendWorldInfo(ServerPlayer player, ServerLevel world, CallbackInfo ci) {
+    public void preOnSendWorldInfo(ServerPlayer Silian_player, ServerLevel Silian_world, CallbackInfo Silian_ci) {
         if (PluslsCarpetAdditionSettings.xaeroWorldName.equals(PluslsCarpetAdditionSettings.xaeroWorldNameNone)) {
             return;
         }
 
-        ResourceLocation xaeroworldmap = ResourceLocationCompat.fromNamespaceAndPath("xaeroworldmap", "main");
-        ResourceLocation xaerominimap = ResourceLocationCompat.fromNamespaceAndPath("xaerominimap", "main");
+        ResourceLocation Silian_xaeroworldmap = ResourceLocationCompat.fromNamespaceAndPath("xaeroworldmap", "main");
+        ResourceLocation Silian_xaerominimap = ResourceLocationCompat.fromNamespaceAndPath("xaerominimap", "main");
 
-        CRC32 crc = new CRC32();
-        byte[] bytes = PluslsCarpetAdditionSettings.xaeroWorldName.getBytes(StandardCharsets.UTF_8);
-        crc.update(bytes, 0, bytes.length);
-        ByteBuf buf = Unpooled.buffer();
-        buf.writeByte(0);
-        buf.writeInt((int) crc.getValue());
+        CRC32 Silian_crc = new CRC32();
+        byte[] Silian_bytes = PluslsCarpetAdditionSettings.xaeroWorldName.getBytes(StandardCharsets.UTF_8);
+        Silian_crc.update(Silian_bytes, 0, Silian_bytes.length);
+        ByteBuf Silian_buf = Unpooled.buffer();
+        Silian_buf.writeByte(0);
+        Silian_buf.writeInt((int) Silian_crc.getValue());
 
         //#if MC < 12005
-        ServerPlayNetworking.send(player, xaeroworldmap, new FriendlyByteBuf(buf.duplicate()));
-        ServerPlayNetworking.send(player, xaerominimap, new FriendlyByteBuf(buf.duplicate()));
+        ServerPlayNetworking.send(Silian_player, Silian_xaeroworldmap, new FriendlyByteBuf(Silian_buf.duplicate()));
+        ServerPlayNetworking.send(Silian_player, Silian_xaerominimap, new FriendlyByteBuf(Silian_buf.duplicate()));
         //#endif
     }
 }

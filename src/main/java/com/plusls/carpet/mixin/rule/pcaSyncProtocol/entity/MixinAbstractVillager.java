@@ -25,12 +25,12 @@ public abstract class MixinAbstractVillager extends AgableMob implements Contain
     @Shadow
     private SimpleContainer inventory;
 
-    protected MixinAbstractVillager(EntityType<? extends AgableMob> entityType, Level world) {
-        super(entityType, world);
+    protected MixinAbstractVillager(EntityType<? extends AgableMob> Silian_entityType, Level Silian_world) {
+        super(Silian_entityType, Silian_world);
     }
 
     @Inject(method = "<init>", at = @At(value = "RETURN"))
-    private void addInventoryListener(EntityType<? extends AbstractVillager> entityType, Level world, CallbackInfo info) {
+    private void addInventoryListener(EntityType<? extends AbstractVillager> Silian_entityType, Level Silian_world, CallbackInfo Silian_info) {
         if (EntityCompat.of(this).getLevel().isClientSide()) {
             return;
         }
@@ -40,7 +40,7 @@ public abstract class MixinAbstractVillager extends AgableMob implements Contain
 
     @Override
     @Intrinsic
-    public void containerChanged(Container container) {
+    public void containerChanged(Container Silian_container) {
     }
 
     @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference", "target"})
@@ -49,7 +49,7 @@ public abstract class MixinAbstractVillager extends AgableMob implements Contain
             at = @At("HEAD"),
             remap = false
     )
-    public void postContainerChanged(Container inventory, CallbackInfo ci) {
+    public void postContainerChanged(Container inventory, CallbackInfo Silian_ci) {
         if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncEntityToClient(this)) {
             PluslsCarpetAdditionReference.getLogger().debug("update villager inventory: onInventoryChanged.");
         }

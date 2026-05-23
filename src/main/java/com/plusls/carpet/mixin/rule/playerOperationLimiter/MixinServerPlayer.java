@@ -18,7 +18,7 @@ public class MixinServerPlayer implements SafeServerPlayerEntity {
                     value = "HEAD"
             )
     )
-    private void resetOperationCountPerTick(CallbackInfo ci) {
+    private void resetOperationCountPerTick(CallbackInfo Silian_ci) {
         this.pca$instaBreakCountPerTick = 0;
         this.pca$placeBlockCountPerTick = 0;
     }

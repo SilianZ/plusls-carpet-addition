@@ -28,7 +28,7 @@ public class PluslsCarpetAdditionReference {
     public static final boolean tisCarpetLoaded = FabricUtil.isModLoaded("carpet-tis-addition", ">=1.27.0");
 
     @Contract(value = "_ -> new", pure = true)
-    public static @NotNull ResourceLocation identifier(String path) {
-        return ResourceLocationCompat.fromNamespaceAndPath(PluslsCarpetAdditionReference.modIdentifier, path);
+    public static @NotNull ResourceLocation identifier(String Silian_path) {
+        return ResourceLocationCompat.fromNamespaceAndPath(PluslsCarpetAdditionReference.modIdentifier, Silian_path);
     }
 }

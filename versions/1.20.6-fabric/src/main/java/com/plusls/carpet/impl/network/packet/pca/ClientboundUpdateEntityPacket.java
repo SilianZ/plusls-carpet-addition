@@ -13,8 +13,8 @@ public record ClientboundUpdateEntityPacket(ResourceLocation dimension, int enti
     public static final Type<ClientboundUpdateEntityPacket> TYPE = new Type<>(PcaSyncProtocol.UPDATE_ENTITY);
     public static final StreamCodec<FriendlyByteBuf, ClientboundUpdateEntityPacket> CODEC = CustomPacketPayload.codec(ClientboundUpdateEntityPacket::write, ClientboundUpdateEntityPacket::new);
 
-    public ClientboundUpdateEntityPacket(@NotNull FriendlyByteBuf byteBuf) {
-        this(byteBuf.readResourceLocation(), byteBuf.readInt(), NetworkUtil.readNbt(byteBuf));
+    public ClientboundUpdateEntityPacket(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        this(Silian_byteBuf.readResourceLocation(), Silian_byteBuf.readInt(), NetworkUtil.readNbt(Silian_byteBuf));
     }
 
     @Override
@@ -22,9 +22,9 @@ public record ClientboundUpdateEntityPacket(ResourceLocation dimension, int enti
         return ClientboundUpdateEntityPacket.TYPE;
     }
 
-    private void write(@NotNull FriendlyByteBuf byteBuf) {
-        byteBuf.writeResourceLocation(this.dimension);
-        byteBuf.writeInt(this.entityId);
-        byteBuf.writeNbt(this.tag);
+    private void write(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        Silian_byteBuf.writeResourceLocation(this.dimension);
+        Silian_byteBuf.writeInt(this.entityId);
+        Silian_byteBuf.writeNbt(this.tag);
     }
 }

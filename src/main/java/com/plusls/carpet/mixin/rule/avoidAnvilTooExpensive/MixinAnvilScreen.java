@@ -20,11 +20,11 @@ public class MixinAnvilScreen {
                     target = "Lnet/minecraft/world/entity/player/Abilities;instabuild:Z"
             )
     )
-    private boolean spoofingClient(@NotNull Abilities playerAbilities) {
-        boolean ret = playerAbilities.instabuild;
-        if (!ret && PluslsCarpetAdditionSettings.avoidAnvilTooExpensive) {
-            ret = true;
+    private boolean spoofingClient(@NotNull Abilities Silian_playerAbilities) {
+        boolean Silian_ret = Silian_playerAbilities.instabuild;
+        if (!Silian_ret && PluslsCarpetAdditionSettings.avoidAnvilTooExpensive) {
+            Silian_ret = true;
         }
-        return ret;
+        return Silian_ret;
     }
 }

@@ -10,8 +10,8 @@ public record ServerboundSyncEntityPacket(int entityId) implements CustomPacketP
     public static final Type<ServerboundSyncEntityPacket> TYPE = new Type<>(PcaSyncProtocol.SYNC_ENTITY);
     public static final StreamCodec<FriendlyByteBuf, ServerboundSyncEntityPacket> CODEC = CustomPacketPayload.codec(ServerboundSyncEntityPacket::write, ServerboundSyncEntityPacket::new);
 
-    public ServerboundSyncEntityPacket(@NotNull FriendlyByteBuf byteBuf) {
-        this(byteBuf.readInt());
+    public ServerboundSyncEntityPacket(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        this(Silian_byteBuf.readInt());
     }
 
     @Override
@@ -19,7 +19,7 @@ public record ServerboundSyncEntityPacket(int entityId) implements CustomPacketP
         return ServerboundSyncEntityPacket.TYPE;
     }
 
-    private void write(@NotNull FriendlyByteBuf byteBuf) {
-        byteBuf.writeInt(this.entityId);
+    private void write(@NotNull FriendlyByteBuf Silian_byteBuf) {
+        Silian_byteBuf.writeInt(this.entityId);
     }
 }

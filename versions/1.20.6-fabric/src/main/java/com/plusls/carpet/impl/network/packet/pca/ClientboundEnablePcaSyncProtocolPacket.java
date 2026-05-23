@@ -10,7 +10,7 @@ public record ClientboundEnablePcaSyncProtocolPacket() implements CustomPacketPa
     public static final Type<ClientboundEnablePcaSyncProtocolPacket> TYPE = new Type<>(PcaSyncProtocol.ENABLE_PCA_SYNC_PROTOCOL);
     public static final StreamCodec<FriendlyByteBuf, ClientboundEnablePcaSyncProtocolPacket> CODEC = CustomPacketPayload.codec(ClientboundEnablePcaSyncProtocolPacket::write, ClientboundEnablePcaSyncProtocolPacket::new);
 
-    public ClientboundEnablePcaSyncProtocolPacket(FriendlyByteBuf byteBuf) {
+    public ClientboundEnablePcaSyncProtocolPacket(FriendlyByteBuf Silian_byteBuf) {
         this();
     }
 
@@ -19,6 +19,6 @@ public record ClientboundEnablePcaSyncProtocolPacket() implements CustomPacketPa
         return ClientboundEnablePcaSyncProtocolPacket.TYPE;
     }
 
-    private void write(FriendlyByteBuf byteBuf) {
+    private void write(FriendlyByteBuf Silian_byteBuf) {
     }
 }

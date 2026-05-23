@@ -28,15 +28,15 @@ public class PluslsCarpetAddition implements ModInitializer, DedicatedServerModI
         GlassBottleDispenserBehavior.init();
         PotionDispenserBehavior.init();
         PluslsCarpetAdditionExtension.getSettingsManager().parseSettingsClass(PluslsCarpetAdditionSettings.class);
-        PluslsCarpetAdditionExtension.getSettingsManager().registerRuleCallback((source, rule, value) -> {
-            if (rule.getName().equals("pcaSyncProtocol")) {
-                if (rule.getRule().getBoolValue()) {
+        PluslsCarpetAdditionExtension.getSettingsManager().registerRuleCallback((Silian_source, Silian_rule, Silian_value) -> {
+            if (Silian_rule.getName().equals("pcaSyncProtocol")) {
+                if (Silian_rule.getRule().getBoolValue()) {
                     PcaSyncProtocol.enablePcaSyncProtocolGlobal();
                 } else {
                     PcaSyncProtocol.disablePcaSyncProtocolGlobal();
                 }
-            } else if (rule.getName().equals("pcaDebug")) {
-                Configurator.setLevel(PluslsCarpetAdditionReference.getModIdentifier(), MiscUtil.cast(rule.getValue()) ? Level.DEBUG : Level.INFO);
+            } else if (Silian_rule.getName().equals("pcaDebug")) {
+                Configurator.setLevel(PluslsCarpetAdditionReference.getModIdentifier(), MiscUtil.cast(Silian_rule.getValue()) ? Level.DEBUG : Level.INFO);
             }
         });
         FlipCooldown.init();

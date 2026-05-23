@@ -18,8 +18,8 @@ import top.hendrixshen.magiclib.api.compat.minecraft.world.entity.EntityCompat;
 
 @Mixin(ItemEntity.class)
 public abstract class MixinItemEntity extends Entity {
-    private MixinItemEntity(EntityType<?> type, Level world) {
-        super(type, world);
+    private MixinItemEntity(EntityType<?> Silian_type, Level Silian_world) {
+        super(Silian_type, Silian_world);
     }
 
     @Shadow
@@ -36,40 +36,40 @@ public abstract class MixinItemEntity extends Entity {
                     //#endif
             )
     )
-    private void checkDiamondEquip(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        EntityCompat entityCompat = EntityCompat.of(this);
+    private void checkDiamondEquip(DamageSource Silian_source, float Silian_amount, CallbackInfoReturnable<Boolean> Silian_cir) {
+        EntityCompat Silian_entityCompat = EntityCompat.of(this);
 
-        if (!PluslsCarpetAdditionSettings.renewableNetheriteEquip || entityCompat.getLevel().isClientSide()) {
+        if (!PluslsCarpetAdditionSettings.renewableNetheriteEquip || Silian_entityCompat.getLevel().isClientSide()) {
             return;
         }
 
-        ServerLevel serverLevel = (ServerLevel) entityCompat.getLevel();
+        ServerLevel Silian_serverLevel = (ServerLevel) Silian_entityCompat.getLevel();
 
         if (
                 //#if MC > 11903
-                //$$ source != serverLevel.damageSources().lava()
+                //$$ Silian_source != Silian_serverLevel.damageSources().lava()
                 //#else
-                source != DamageSource.LAVA
+                Silian_source != DamageSource.LAVA
                 //#endif
-                        && serverLevel.dimension() != Level.NETHER
+                        && Silian_serverLevel.dimension() != Level.NETHER
         ) {
             return;
         }
 
-        ItemStack stack = this.getItem();
+        ItemStack Silian_stack = this.getItem();
 
-        if (stack.isEmpty() || stack.getMaxDamage() - stack.getDamageValue() != 1) {
+        if (Silian_stack.isEmpty() || Silian_stack.getMaxDamage() - Silian_stack.getDamageValue() != 1) {
             return;
         }
 
-        Item item = stack.getItem();
+        Item Silian_item = Silian_stack.getItem();
 
-        if ((item instanceof ArmorItem && ((ArmorItem) item).getMaterial() == ArmorMaterials.DIAMOND) ||
-                item instanceof TieredItem && ((TieredItem) item).getTier() == Tiers.DIAMOND) {
-            ItemStack newItemStack = ItemUtil.upGradeToNetheriteLike(stack);
+        if ((Silian_item instanceof ArmorItem && ((ArmorItem) Silian_item).getMaterial() == ArmorMaterials.DIAMOND) ||
+                Silian_item instanceof TieredItem && ((TieredItem) Silian_item).getTier() == Tiers.DIAMOND) {
+            ItemStack Silian_newItemStack = ItemUtil.upGradeToNetheriteLike(Silian_stack);
 
-            if (newItemStack != null) {
-                serverLevel.addFreshEntity(new ItemEntity(serverLevel, this.getX(), this.getY(), this.getZ(), newItemStack));
+            if (Silian_newItemStack != null) {
+                Silian_serverLevel.addFreshEntity(new ItemEntity(Silian_serverLevel, this.getX(), this.getY(), this.getZ(), Silian_newItemStack));
             }
         }
     }

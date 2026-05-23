@@ -19,37 +19,37 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(PlayerHeadBlock.class)
 public abstract class MixinPlayerHeadBlock extends SkullBlock {
-    protected MixinPlayerHeadBlock(Type skullType, Properties settings) {
-        super(skullType, settings);
+    protected MixinPlayerHeadBlock(Type Silian_skullType, Properties Silian_settings) {
+        super(Silian_skullType, Silian_settings);
     }
 
     @Override
-    public void playerDestroy(@NotNull Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
-        if (level.isClientSide()) {
+    public void playerDestroy(@NotNull Level Silian_level, Player Silian_player, BlockPos Silian_pos, BlockState Silian_state, @Nullable BlockEntity Silian_blockEntity, ItemStack Silian_stack) {
+        if (Silian_level.isClientSide()) {
             return;
         }
-        if (blockEntity instanceof GravesStoneSkullBlockEntity) {
-            DeathInfo deathInfo = ((GravesStoneSkullBlockEntity) blockEntity).pca$getDeathInfo();
-            if (deathInfo == null) {
-                super.playerDestroy(level, player, pos, state, blockEntity, stack);
+        if (Silian_blockEntity instanceof GravesStoneSkullBlockEntity) {
+            DeathInfo Silian_deathInfo = ((GravesStoneSkullBlockEntity) Silian_blockEntity).pca$getDeathInfo();
+            if (Silian_deathInfo == null) {
+                super.playerDestroy(Silian_level, Silian_player, Silian_pos, Silian_state, Silian_blockEntity, Silian_stack);
             } else {
-                player.awardStat(Stats.BLOCK_MINED.get(this));
-                player.causeFoodExhaustion(0.005F);
+                Silian_player.awardStat(Stats.BLOCK_MINED.get(this));
+                Silian_player.causeFoodExhaustion(0.005F);
                 // Drop item
                 //#if MC > 11502
-                for (ItemStack itemStack : deathInfo.inventory.removeAllItems()) {
+                for (ItemStack Silian_itemStack : Silian_deathInfo.inventory.removeAllItems()) {
                 //#else
-                //$$ for (ItemStack itemStack : deathInfo.inventory) {
+                //$$ for (ItemStack Silian_itemStack : Silian_deathInfo.inventory) {
                 //#endif
-                    Block.popResource(level, pos, itemStack);
+                    Block.popResource(Silian_level, Silian_pos, Silian_itemStack);
                 }
 
                 // Drop xp
-                int xp = deathInfo.xp;
-                while (xp > 0) {
-                    int spawnedXp = ExperienceOrb.getExperienceValue(xp);
-                    xp -= spawnedXp;
-                    level.addFreshEntity(new ExperienceOrb(level, pos.getX(), pos.getY(), pos.getZ(), spawnedXp));
+                int Silian_xp = Silian_deathInfo.xp;
+                while (Silian_xp > 0) {
+                    int Silian_spawnedXp = ExperienceOrb.getExperienceValue(Silian_xp);
+                    Silian_xp -= Silian_spawnedXp;
+                    Silian_level.addFreshEntity(new ExperienceOrb(Silian_level, Silian_pos.getX(), Silian_pos.getY(), Silian_pos.getZ(), Silian_spawnedXp));
                 }
             }
         }

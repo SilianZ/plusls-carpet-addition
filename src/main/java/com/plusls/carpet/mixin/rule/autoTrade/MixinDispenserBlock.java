@@ -46,146 +46,146 @@ public class MixinDispenserBlock {
     private static final DefaultDispenseItemBehavior pca$itemDispenserBehavior = new DefaultDispenseItemBehavior();
 
     @Unique
-    private static void pca$depleteItemInInventory(@NotNull ItemStack itemStack, Container container) {
-        Item item = itemStack.getItem();
+    private static void pca$depleteItemInInventory(@NotNull ItemStack Silian_itemStack, Container Silian_container) {
+        Item Silian_item = Silian_itemStack.getItem();
 
-        for (int i = 0; !itemStack.isEmpty() && i < container.getContainerSize(); ++i) {
-            ItemStack stack = container.getItem(i);
-            ItemStackCompat stackCompat = ItemStackCompat.of(stack);
+        for (int Silian_i = 0; !Silian_itemStack.isEmpty() && Silian_i < Silian_container.getContainerSize(); ++Silian_i) {
+            ItemStack Silian_stack = Silian_container.getItem(Silian_i);
+            ItemStackCompat Silian_stackCompat = ItemStackCompat.of(Silian_stack);
 
-            if (!stack.isEmpty() && stackCompat.is(item)) {
-                int count = Math.min(itemStack.getCount(), stack.getCount());
-                itemStack.setCount(itemStack.getCount() - count);
-                stack.setCount(stack.getCount() - count);
+            if (!Silian_stack.isEmpty() && Silian_stackCompat.is(Silian_item)) {
+                int Silian_count = Math.min(Silian_itemStack.getCount(), Silian_stack.getCount());
+                Silian_itemStack.setCount(Silian_itemStack.getCount() - Silian_count);
+                Silian_stack.setCount(Silian_stack.getCount() - Silian_count);
             }
         }
     }
 
     @Unique
-    private static ItemStack pca$getItemFromInventory(@NotNull ItemStack itemStack, Container container) {
-        if (itemStack.isEmpty()) {
+    private static ItemStack pca$getItemFromInventory(@NotNull ItemStack Silian_itemStack, Container Silian_container) {
+        if (Silian_itemStack.isEmpty()) {
             return ItemStack.EMPTY;
         }
 
-        Item item = itemStack.getItem();
-        ItemStack ret = new ItemStack(item, 0);
+        Item Silian_item = Silian_itemStack.getItem();
+        ItemStack Silian_ret = new ItemStack(Silian_item, 0);
 
-        for (int i = 0; i < container.getContainerSize(); ++i) {
-            ItemStack stack = container.getItem(i);
-            ItemStackCompat stackCompat = ItemStackCompat.of(stack);
+        for (int Silian_i = 0; Silian_i < Silian_container.getContainerSize(); ++Silian_i) {
+            ItemStack Silian_stack = Silian_container.getItem(Silian_i);
+            ItemStackCompat Silian_stackCompat = ItemStackCompat.of(Silian_stack);
 
-            if (!stack.isEmpty() && stackCompat.is(item)) {
-                ret.setCount(Math.min(stack.getCount() + ret.getCount(), ret.getMaxStackSize()));
+            if (!Silian_stack.isEmpty() && Silian_stackCompat.is(Silian_item)) {
+                Silian_ret.setCount(Math.min(Silian_stack.getCount() + Silian_ret.getCount(), Silian_ret.getMaxStackSize()));
 
-                if (ret.getCount() == ret.getMaxStackSize()) {
+                if (Silian_ret.getCount() == Silian_ret.getMaxStackSize()) {
                     break;
                 }
             }
         }
 
-        return ret;
+        return Silian_ret;
     }
 
     @Inject(method = "dispenseFrom", at = @At(value = "HEAD"), cancellable = true)
     private void autoTrade(
             //#if MC > 11502
-            ServerLevel level,
+            ServerLevel Silian_level,
             //#if MC > 12001
             //$$ BlockState blockState,
             //#endif
             //#else
-            //$$ Level level,
+            //$$ Level Silian_level,
             //#endif
-            BlockPos blockPos,
-            CallbackInfo ci
+            BlockPos Silian_blockPos,
+            CallbackInfo Silian_ci
     ) {
         if (!PluslsCarpetAdditionSettings.autoTrade) {
             return;
         }
 
-        BlockState state = level.getBlockState(blockPos.below());
-        BlockStateCompat blockStateCompat = BlockStateCompat.of(state);
-        boolean tradeAll;
+        BlockState Silian_state = Silian_level.getBlockState(Silian_blockPos.below());
+        BlockStateCompat Silian_blockStateCompat = BlockStateCompat.of(Silian_state);
+        boolean Silian_tradeAll;
 
-        if (blockStateCompat.is(Blocks.EMERALD_BLOCK)) {
-            tradeAll = false;
-        } else if (blockStateCompat.is(Blocks.DIAMOND_BLOCK)) {
-            tradeAll = true;
+        if (Silian_blockStateCompat.is(Blocks.EMERALD_BLOCK)) {
+            Silian_tradeAll = false;
+        } else if (Silian_blockStateCompat.is(Blocks.DIAMOND_BLOCK)) {
+            Silian_tradeAll = true;
         } else {
             return;
         }
 
-        BlockPos faceBlockPos = blockPos.relative(level.getBlockState(blockPos).getValue(DispenserBlock.FACING));
-        List<AbstractVillager> villagerList = level.getEntitiesOfClass(AbstractVillager.class,
-                new AABB(faceBlockPos), Entity::isAlive);
+        BlockPos Silian_faceBlockPos = Silian_blockPos.relative(Silian_level.getBlockState(Silian_blockPos).getValue(DispenserBlock.FACING));
+        List<AbstractVillager> Silian_villagerList = Silian_level.getEntitiesOfClass(AbstractVillager.class,
+                new AABB(Silian_faceBlockPos), Entity::isAlive);
 
-        if (villagerList.isEmpty()) {
+        if (Silian_villagerList.isEmpty()) {
             return;
         }
 
-        AbstractVillager merchantEntity = villagerList.get(0);
-        MerchantOffers offerList = merchantEntity.getOffers();
+        AbstractVillager Silian_merchantEntity = Silian_villagerList.get(0);
+        MerchantOffers Silian_offerList = Silian_merchantEntity.getOffers();
 
-        if (offerList.isEmpty()) {
+        if (Silian_offerList.isEmpty()) {
             return;
         }
 
-        int tradeId = level.getBestNeighborSignal(blockPos);
+        int Silian_tradeId = Silian_level.getBestNeighborSignal(Silian_blockPos);
 
-        if (tradeId == 0) {
+        if (Silian_tradeId == 0) {
             return;
         }
 
-        MerchantOffer offer = offerList.get(tradeId > offerList.size() ? offerList.size() - 1 : tradeId - 1);
-        ItemStack firstItemStack = offer.getCostA();
-        ItemStack secondItemStack = offer.getCostB();
-        ItemStack firstDepleteItem = firstItemStack.copy();
-        ItemStack secondDepleteItem = secondItemStack.copy();
-        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        MerchantOffer Silian_offer = Silian_offerList.get(Silian_tradeId > Silian_offerList.size() ? Silian_offerList.size() - 1 : Silian_tradeId - 1);
+        ItemStack Silian_firstItemStack = Silian_offer.getCostA();
+        ItemStack Silian_secondItemStack = Silian_offer.getCostB();
+        ItemStack Silian_firstDepleteItem = Silian_firstItemStack.copy();
+        ItemStack Silian_secondDepleteItem = Silian_secondItemStack.copy();
+        BlockEntity Silian_blockEntity = Silian_level.getBlockEntity(Silian_blockPos);
 
-        if (!(blockEntity instanceof DispenserBlockEntity)) {
+        if (!(Silian_blockEntity instanceof DispenserBlockEntity)) {
             return;
         }
 
         //#if MC > 12001
-        //$$ BlockSource blockPointer = new BlockSource(level, blockPos, blockState, (DispenserBlockEntity) blockEntity);
+        //$$ BlockSource Silian_blockPointer = new BlockSource(Silian_level, Silian_blockPos, blockState, (DispenserBlockEntity) Silian_blockEntity);
         //#else
-        BlockSourceImpl blockPointer = new BlockSourceImpl(level, blockPos);
+        BlockSourceImpl Silian_blockPointer = new BlockSourceImpl(Silian_level, Silian_blockPos);
         //#endif
-        DispenserBlockEntity dispenserBlockEntity = (DispenserBlockEntity) blockEntity;
-        boolean success = false;
+        DispenserBlockEntity Silian_dispenserBlockEntity = (DispenserBlockEntity) Silian_blockEntity;
+        boolean Silian_success = false;
 
-        while (!offer.isOutOfStock()) {
-            ItemStack firstInventoryItemStack = pca$getItemFromInventory(firstItemStack, dispenserBlockEntity);
-            ItemStack secondInventoryItemStack = pca$getItemFromInventory(secondItemStack, dispenserBlockEntity);
-            int firstItemCount = firstInventoryItemStack.getCount();
-            int secondItemCount = secondInventoryItemStack.getCount();
+        while (!Silian_offer.isOutOfStock()) {
+            ItemStack Silian_firstInventoryItemStack = pca$getItemFromInventory(Silian_firstItemStack, Silian_dispenserBlockEntity);
+            ItemStack Silian_secondInventoryItemStack = pca$getItemFromInventory(Silian_secondItemStack, Silian_dispenserBlockEntity);
+            int Silian_firstItemCount = Silian_firstInventoryItemStack.getCount();
+            int Silian_secondItemCount = Silian_secondInventoryItemStack.getCount();
 
-            if (offer.take(firstInventoryItemStack, secondInventoryItemStack)) {
-                firstDepleteItem.setCount(firstItemCount - firstInventoryItemStack.getCount());
-                secondDepleteItem.setCount(secondItemCount - secondInventoryItemStack.getCount());
-                pca$depleteItemInInventory(firstDepleteItem, dispenserBlockEntity);
-                pca$depleteItemInInventory(secondDepleteItem, dispenserBlockEntity);
-                offer.increaseUses();
-                ItemStack outputItemStack = offer.assemble();
-                pca$itemDispenserBehavior.dispense(blockPointer, outputItemStack);
+            if (Silian_offer.take(Silian_firstInventoryItemStack, Silian_secondInventoryItemStack)) {
+                Silian_firstDepleteItem.setCount(Silian_firstItemCount - Silian_firstInventoryItemStack.getCount());
+                Silian_secondDepleteItem.setCount(Silian_secondItemCount - Silian_secondInventoryItemStack.getCount());
+                pca$depleteItemInInventory(Silian_firstDepleteItem, Silian_dispenserBlockEntity);
+                pca$depleteItemInInventory(Silian_secondDepleteItem, Silian_dispenserBlockEntity);
+                Silian_offer.increaseUses();
+                ItemStack Silian_outputItemStack = Silian_offer.assemble();
+                pca$itemDispenserBehavior.dispense(Silian_blockPointer, Silian_outputItemStack);
                 // make villager happy ~
-                level.broadcastEntityEvent(merchantEntity, (byte) 14);
-                if (merchantEntity instanceof MyVillagerEntity) {
-                    ((MyVillagerEntity) (merchantEntity)).pca$tradeWithoutPlayer(offer);
+                Silian_level.broadcastEntityEvent(Silian_merchantEntity, (byte) 14);
+                if (Silian_merchantEntity instanceof MyVillagerEntity) {
+                    ((MyVillagerEntity) (Silian_merchantEntity)).pca$tradeWithoutPlayer(Silian_offer);
                 }
-                success = true;
+                Silian_success = true;
             } else {
                 break;
             }
 
-            if (!tradeAll) {
+            if (!Silian_tradeAll) {
                 break;
             }
         }
 
-        if (success) {
-            ci.cancel();
+        if (Silian_success) {
+            Silian_ci.cancel();
         }
     }
 }

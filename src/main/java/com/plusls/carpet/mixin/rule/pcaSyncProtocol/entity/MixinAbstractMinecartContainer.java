@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractMinecartContainer.class)
 public abstract class MixinAbstractMinecartContainer extends AbstractMinecart {
-    protected MixinAbstractMinecartContainer(EntityType<?> entityType, Level world) {
-        super(entityType, world);
+    protected MixinAbstractMinecartContainer(EntityType<?> Silian_entityType, Level Silian_world) {
+        super(Silian_entityType, Silian_world);
     }
 
     @Inject(
@@ -24,7 +24,7 @@ public abstract class MixinAbstractMinecartContainer extends AbstractMinecart {
                     value = "RETURN"
             )
     )
-    private void updateInventory(CallbackInfo ci) {
+    private void updateInventory(CallbackInfo Silian_ci) {
         if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncEntityToClient(this)) {
             PluslsCarpetAdditionReference.getLogger().debug("update StorageMinecartEntity inventory.");
         }

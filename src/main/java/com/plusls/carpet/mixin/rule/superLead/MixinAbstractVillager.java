@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractVillager.class)
 public abstract class MixinAbstractVillager extends AgableMob {
-    protected MixinAbstractVillager(EntityType<? extends AgableMob> entityType, Level level) {
-        super(entityType, level);
+    protected MixinAbstractVillager(EntityType<? extends AgableMob> Silian_entityType, Level Silian_level) {
+        super(Silian_entityType, Silian_level);
     }
 
     @Inject(
@@ -24,9 +24,9 @@ public abstract class MixinAbstractVillager extends AgableMob {
             ),
             cancellable = true
     )
-    private void postCanBeLeashed(Player player, CallbackInfoReturnable<Boolean> cir) {
+    private void postCanBeLeashed(Player Silian_player, CallbackInfoReturnable<Boolean> Silian_cir) {
         if (PluslsCarpetAdditionSettings.superLead) {
-            cir.setReturnValue(!isLeashed());
+            Silian_cir.setReturnValue(!isLeashed());
         }
     }
 }

@@ -10,7 +10,7 @@ public record ClientboundDisablePcaSyncProtocolPacket() implements CustomPacketP
     public static final Type<ClientboundDisablePcaSyncProtocolPacket> TYPE = new Type<>(PcaSyncProtocol.DISABLE_PCA_SYNC_PROTOCOL);
     public static final StreamCodec<FriendlyByteBuf, ClientboundDisablePcaSyncProtocolPacket> CODEC = CustomPacketPayload.codec(ClientboundDisablePcaSyncProtocolPacket::write, ClientboundDisablePcaSyncProtocolPacket::new);
 
-    public ClientboundDisablePcaSyncProtocolPacket(FriendlyByteBuf byteBuf) {
+    public ClientboundDisablePcaSyncProtocolPacket(FriendlyByteBuf Silian_byteBuf) {
         this();
     }
 
@@ -19,6 +19,6 @@ public record ClientboundDisablePcaSyncProtocolPacket() implements CustomPacketP
         return ClientboundDisablePcaSyncProtocolPacket.TYPE;
     }
 
-    private void write(FriendlyByteBuf byteBuf) {
+    private void write(FriendlyByteBuf Silian_byteBuf) {
     }
 }

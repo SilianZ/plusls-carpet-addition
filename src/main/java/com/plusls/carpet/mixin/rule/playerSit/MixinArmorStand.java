@@ -23,8 +23,8 @@ public abstract class MixinArmorStand extends LivingEntity implements SitEntity 
     @Unique
     private boolean pca$sitEntity = false;
 
-    protected MixinArmorStand(EntityType<? extends LivingEntity> entityType, Level world) {
-        super(entityType, world);
+    protected MixinArmorStand(EntityType<? extends LivingEntity> Silian_entityType, Level Silian_world) {
+        super(Silian_entityType, Silian_world);
     }
 
     @Shadow
@@ -36,16 +36,16 @@ public abstract class MixinArmorStand extends LivingEntity implements SitEntity 
     }
 
     @Override
-    public void pca$setSitEntity(boolean isSitEntity) {
-        this.pca$sitEntity = isSitEntity;
-        this.setMarker(isSitEntity);
-        this.setInvisible(isSitEntity);
+    public void pca$setSitEntity(boolean Silian_isSitEntity) {
+        this.pca$sitEntity = Silian_isSitEntity;
+        this.setMarker(Silian_isSitEntity);
+        this.setInvisible(Silian_isSitEntity);
     }
 
     @Override
     @Intrinsic
-    protected void removePassenger(Entity passenger) {
-        super.removePassenger(passenger);
+    protected void removePassenger(Entity Silian_passenger) {
+        super.removePassenger(Silian_passenger);
     }
 
     @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference", "target"})
@@ -53,10 +53,10 @@ public abstract class MixinArmorStand extends LivingEntity implements SitEntity 
             method = "removePassenger(Lnet/minecraft/world/entity/Entity;)V",
             at = @At("HEAD")
     )
-    private void preRemovePassenger(Entity passenger, CallbackInfo ci) {
+    private void preRemovePassenger(Entity Silian_passenger, CallbackInfo Silian_ci) {
         if (this.pca$isSitEntity()) {
-            EntityCompat entityCompat = EntityCompat.of(this);
-            this.setPos(entityCompat.getX(), entityCompat.getY() + 0.16, entityCompat.getZ());
+            EntityCompat Silian_entityCompat = EntityCompat.of(this);
+            this.setPos(Silian_entityCompat.getX(), Silian_entityCompat.getY() + 0.16, Silian_entityCompat.getZ());
             this.kill();
         }
     }
@@ -65,9 +65,9 @@ public abstract class MixinArmorStand extends LivingEntity implements SitEntity 
             method = "addAdditionalSaveData",
             at = @At("RETURN")
     )
-    private void postAddAdditionalSaveData(CompoundTag nbt, CallbackInfo ci) {
+    private void postAddAdditionalSaveData(CompoundTag Silian_nbt, CallbackInfo Silian_ci) {
         if (this.pca$sitEntity) {
-            nbt.putBoolean("SitEntity", true);
+            Silian_nbt.putBoolean("SitEntity", true);
         }
     }
 
@@ -75,9 +75,9 @@ public abstract class MixinArmorStand extends LivingEntity implements SitEntity 
             method = "readAdditionalSaveData",
             at = @At("RETURN")
     )
-    private void postReadAdditionalSaveData(@NotNull CompoundTag nbt, CallbackInfo ci) {
-        if (nbt.contains("SitEntity", TagCompat.TAG_BYTE)) {
-            this.pca$sitEntity = nbt.getBoolean("SitEntity");
+    private void postReadAdditionalSaveData(@NotNull CompoundTag Silian_nbt, CallbackInfo Silian_ci) {
+        if (Silian_nbt.contains("SitEntity", TagCompat.TAG_BYTE)) {
+            this.pca$sitEntity = Silian_nbt.getBoolean("SitEntity");
         }
     }
 }

@@ -23,8 +23,8 @@ public abstract class MixinVillager extends AbstractVillager {
     @Unique
     private TemptGoal pca$villagersAttractedByEmeraldBlockGoal;
 
-    public MixinVillager(EntityType<? extends AbstractVillager> entityType, Level world) {
-        super(entityType, world);
+    public MixinVillager(EntityType<? extends AbstractVillager> Silian_entityType, Level Silian_world) {
+        super(Silian_entityType, Silian_world);
     }
 
     @Inject(
@@ -33,7 +33,7 @@ public abstract class MixinVillager extends AbstractVillager {
                     value = "RETURN"
             )
     )
-    private void init(EntityType<? extends Villager> entityType, Level world, VillagerType type, CallbackInfo ci) {
+    private void init(EntityType<? extends Villager> Silian_entityType, Level Silian_world, VillagerType Silian_type, CallbackInfo Silian_ci) {
         if (EntityCompat.of(this).getLevel().isClientSide()) {
             return;
         }
@@ -47,7 +47,7 @@ public abstract class MixinVillager extends AbstractVillager {
                     value = "RETURN"
             )
     )
-    private void checkVillagersAttractedByEmeraldBlock(CallbackInfo ci) {
+    private void checkVillagersAttractedByEmeraldBlock(CallbackInfo Silian_ci) {
         if (EntityCompat.of(this).getLevel().isClientSide()) {
             return;
         }

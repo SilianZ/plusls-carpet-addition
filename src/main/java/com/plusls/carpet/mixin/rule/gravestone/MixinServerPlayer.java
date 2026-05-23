@@ -27,20 +27,20 @@ import net.minecraft.core.BlockPos;
 @Mixin(ServerPlayer.class)
 public abstract class MixinServerPlayer extends Player {
     //#if MC > 11902
-    //$$ public MixinServerPlayer(Level level, BlockPos blockPos, float f, GameProfile gameProfile) {
-    //$$     super(level, blockPos, f, gameProfile);
+    //$$ public MixinServerPlayer(Level Silian_level, BlockPos Silian_blockPos, float Silian_f, GameProfile Silian_gameProfile) {
+    //$$     super(Silian_level, Silian_blockPos, Silian_f, Silian_gameProfile);
     //$$ }
     //#elseif MC > 11802
-    //$$ public MixinServerPlayer(Level level, BlockPos blockPos, float f, GameProfile gameProfile, @Nullable ProfilePublicKey profilePublicKey) {
-    //$$     super(level, blockPos, f, gameProfile, profilePublicKey);
+    //$$ public MixinServerPlayer(Level Silian_level, BlockPos Silian_blockPos, float Silian_f, GameProfile Silian_gameProfile, @Nullable ProfilePublicKey Silian_profilePublicKey) {
+    //$$     super(Silian_level, Silian_blockPos, Silian_f, Silian_gameProfile, Silian_profilePublicKey);
     //$$ }
     //#elseif MC > 11502
-    public MixinServerPlayer(Level level, BlockPos blockPos, float f, GameProfile gameProfile) {
-        super(level, blockPos, f, gameProfile);
+    public MixinServerPlayer(Level Silian_level, BlockPos Silian_blockPos, float Silian_f, GameProfile Silian_gameProfile) {
+        super(Silian_level, Silian_blockPos, Silian_f, Silian_gameProfile);
     }
     //#else
-    //$$ public MixinServerPlayer(Level level, GameProfile gameProfile) {
-    //$$     super(level, gameProfile);
+    //$$ public MixinServerPlayer(Level Silian_level, GameProfile Silian_gameProfile) {
+    //$$     super(Silian_level, Silian_gameProfile);
     //$$ }
     //#endif
 
@@ -53,7 +53,7 @@ public abstract class MixinServerPlayer extends Player {
     //$$                 target = "Lnet/minecraft/server/level/ServerPlayer;dropAllDeathLoot(Lnet/minecraft/world/damagesource/DamageSource;)V"
     //$$         )
     //$$ )
-    //$$ private void onOnDeath(DamageSource source, CallbackInfo ci) {
+    //$$ private void onOnDeath(DamageSource Silian_source, CallbackInfo Silian_ci) {
     //$$     GravestoneUtil.deathHandle(MiscUtil.cast(this));
     //$$ }
     //#endif

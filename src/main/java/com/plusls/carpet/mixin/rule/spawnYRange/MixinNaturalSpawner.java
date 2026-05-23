@@ -33,27 +33,27 @@ public class MixinNaturalSpawner {
             )
     )
     //#if MC > 11802
-    //$$ private static int modifySpawnY(RandomSource random, int min, int max) {
+    //$$ private static int modifySpawnY(RandomSource Silian_random, int Silian_min, int Silian_max) {
     //#elseif MC > 11605
-    //$$ private static int modifySpawnY(Random random, int min, int max) {
+    //$$ private static int modifySpawnY(Random Silian_random, int Silian_min, int Silian_max) {
     //#else
-    private static int modifySpawnY(Random random, int bound) {
-        int max = bound, min = 0;
+    private static int modifySpawnY(Random Silian_random, int Silian_bound) {
+        int Silian_max = Silian_bound, Silian_min = 0;
     //#endif
         if (PluslsCarpetAdditionSettings.spawnYMax != PluslsCarpetAdditionSettings.INT_DISABLE) {
-            max = PluslsCarpetAdditionSettings.spawnYMax;
+            Silian_max = PluslsCarpetAdditionSettings.spawnYMax;
         }
         if (PluslsCarpetAdditionSettings.spawnYMin != PluslsCarpetAdditionSettings.INT_DISABLE) {
-            min = PluslsCarpetAdditionSettings.spawnYMin;
+            Silian_min = PluslsCarpetAdditionSettings.spawnYMin;
         }
-        if (min >= max) {
-            max = min + 1;
+        if (Silian_min >= Silian_max) {
+            Silian_max = Silian_min + 1;
         }
         //#if MC > 11605
-        //$$ return Mth.randomBetweenInclusive(random, min, max);
+        //$$ return Mth.randomBetweenInclusive(Silian_random, Silian_min, Silian_max);
         //#else
-        int newBound = max - min;
-        return random.nextInt(newBound) + min;
+        int Silian_newBound = Silian_max - Silian_min;
+        return Silian_random.nextInt(Silian_newBound) + Silian_min;
         //#endif
     }
 }

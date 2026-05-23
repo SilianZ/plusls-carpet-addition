@@ -35,7 +35,7 @@ public abstract class MixinServerPlayerGameMode {
 
     //#if MC > 11802
     //$$ @Shadow
-    //$$ protected abstract void debugLogging(BlockPos blockPos, boolean bl, int sequence, String reason);
+    //$$ protected abstract void debugLogging(BlockPos Silian_blockPos, boolean Silian_bl, int Silian_sequence, String Silian_reason);
     //#endif
 
     @Inject(
@@ -48,33 +48,33 @@ public abstract class MixinServerPlayerGameMode {
             cancellable = true
     )
     //#if MC > 11802
-    //$$ private void checkOperationCountPerTick(BlockPos pos, int sequence, String reason, CallbackInfo ci) {
+    //$$ private void checkOperationCountPerTick(BlockPos Silian_pos, int Silian_sequence, String Silian_reason, CallbackInfo Silian_ci) {
     //#elseif MC > 11404
-    private void checkOperationCountPerTick(BlockPos pos, ServerboundPlayerActionPacket.Action action, String reason, CallbackInfo ci) {
+    private void checkOperationCountPerTick(BlockPos Silian_pos, ServerboundPlayerActionPacket.Action Silian_action, String Silian_reason, CallbackInfo Silian_ci) {
     //#else
-    //$$ private void checkOperationCountPerTick(BlockPos pos, ServerboundPlayerActionPacket.Action action, CallbackInfo ci) {
+    //$$ private void checkOperationCountPerTick(BlockPos Silian_pos, ServerboundPlayerActionPacket.Action Silian_action, CallbackInfo Silian_ci) {
     //#endif
         //#if MC > 11802
-        //$$ if (!PluslsCarpetAdditionSettings.playerOperationLimiter || !reason.equals(pca$instaMineReason)) {
+        //$$ if (!PluslsCarpetAdditionSettings.playerOperationLimiter || !Silian_reason.equals(pca$instaMineReason)) {
         //#else
         if (!PluslsCarpetAdditionSettings.playerOperationLimiter) {
         //#endif
             return;
         }
-        SafeServerPlayerEntity safeServerPlayerEntity = (SafeServerPlayerEntity) player;
-        safeServerPlayerEntity.pca$addInstaBreakCountPerTick();
-        if (!safeServerPlayerEntity.pca$allowOperation()) {
+        SafeServerPlayerEntity Silian_safeServerPlayerEntity = (SafeServerPlayerEntity) player;
+        Silian_safeServerPlayerEntity.pca$addInstaBreakCountPerTick();
+        if (!Silian_safeServerPlayerEntity.pca$allowOperation()) {
             //#if MC > 11502
-            this.player.connection.send(new ClientboundBlockUpdatePacket(pos, this.level.getBlockState(pos)));
+            this.player.connection.send(new ClientboundBlockUpdatePacket(Silian_pos, this.level.getBlockState(Silian_pos)));
             //#elseif MC > 11404
-            //$$ this.player.connection.send(new ClientboundBlockBreakAckPacket(pos, this.level.getBlockState(pos), action, false, reason));
+            //$$ this.player.connection.send(new ClientboundBlockBreakAckPacket(Silian_pos, this.level.getBlockState(Silian_pos), Silian_action, false, Silian_reason));
             //#else
-            //$$ this.player.connection.send(new ClientboundBlockBreakAckPacket(pos, this.level.getBlockState(pos), action, false));
+            //$$ this.player.connection.send(new ClientboundBlockBreakAckPacket(Silian_pos, this.level.getBlockState(Silian_pos), Silian_action, false));
             //#endif
             //#if MC > 11802
-            //$$ this.debugLogging(pos, false, sequence, reason);
+            //$$ this.debugLogging(Silian_pos, false, Silian_sequence, Silian_reason);
             //#endif
-            ci.cancel();
+            Silian_ci.cancel();
         }
     }
 

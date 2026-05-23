@@ -25,8 +25,8 @@ public abstract class MixinItemEntity extends Entity {
     @Unique
     private int pca$trackItemPickupByPlayerCooldown = 0;
 
-    public MixinItemEntity(EntityType<?> type, Level level) {
-        super(type, level);
+    public MixinItemEntity(EntityType<?> Silian_type, Level Silian_level) {
+        super(Silian_type, Silian_level);
     }
 
     @Shadow
@@ -40,9 +40,9 @@ public abstract class MixinItemEntity extends Entity {
             at = @At("HEAD"),
             cancellable = true
     )
-    private void prevTick(CallbackInfo ci) {
+    private void prevTick(CallbackInfo Silian_ci) {
         if (!EntityCompat.of(this).getLevel().isClientSide() && PluslsCarpetAdditionSettings.trackItemPickupByPlayer && pca$pickup) {
-            ci.cancel();
+            Silian_ci.cancel();
         }
     }
 
@@ -55,21 +55,21 @@ public abstract class MixinItemEntity extends Entity {
             ),
             cancellable = true
     )
-    private void checkPickup(Player player, CallbackInfo ci) {
+    private void checkPickup(Player Silian_player, CallbackInfo Silian_ci) {
         if (!PluslsCarpetAdditionSettings.trackItemPickupByPlayer) {
             return;
         }
 
-        EntityCompat entityCompat = EntityCompat.of(this);
+        EntityCompat Silian_entityCompat = EntityCompat.of(this);
 
-        if (!entityCompat.getLevel().isClientSide()) {
+        if (!Silian_entityCompat.getLevel().isClientSide()) {
             return;
         }
 
         if (pca$trackItemPickupByPlayerCooldown == 0) {
             MessageUtil.sendServerMessage(ComponentCompat.translatable("pca.message.pickup",
-                    player.getName().getString(),
-                    entityCompat.getX(), entityCompat.getY(), entityCompat.getZ(),
+                    Silian_player.getName().getString(),
+                    Silian_entityCompat.getX(), Silian_entityCompat.getY(), Silian_entityCompat.getZ(),
                     this.getDeltaMovement().x(), this.getDeltaMovement().y(), this.getDeltaMovement().z()));
         }
 
@@ -79,6 +79,6 @@ public abstract class MixinItemEntity extends Entity {
         this.setNoGravity(true);
         this.noPhysics = true;
         this.setDeltaMovement(0, 0, 0);
-        ci.cancel();
+        Silian_ci.cancel();
     }
 }

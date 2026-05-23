@@ -24,14 +24,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HopperBlockEntity.class)
 public abstract class MixinHopperBlockEntity extends RandomizableContainerBlockEntity {
     private MixinHopperBlockEntity(
-            BlockEntityType<?> blockEntityType
+            BlockEntityType<?> Silian_blockEntityType
             //#if MC > 11605
             //$$ , BlockPos blockPos
             //$$ , BlockState blockState
             //#endif
     ) {
         super(
-                blockEntityType
+                Silian_blockEntityType
                 //#if MC > 11605
                 //$$ , blockPos
                 //$$ , blockState
@@ -47,9 +47,9 @@ public abstract class MixinHopperBlockEntity extends RandomizableContainerBlockE
     //$$                 target = "Lnet/minecraft/world/level/block/entity/HopperBlockEntity;setChanged(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
     //$$         )
     //$$ )
-    //$$ private static void onSetChanged(Level world, BlockPos pos, BlockState state, HopperBlockEntity blockEntity, BooleanSupplier booleanSupplier, CallbackInfoReturnable<Boolean> cir) {
-    //$$     if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(blockEntity)) {
-    //$$         PluslsCarpetAdditionReference.getLogger().debug("update HopperBlockEntity: {}", pos);
+    //$$ private static void onSetChanged(Level Silian_world, BlockPos Silian_pos, BlockState Silian_state, HopperBlockEntity Silian_blockEntity, BooleanSupplier Silian_booleanSupplier, CallbackInfoReturnable<Boolean> Silian_cir) {
+    //$$     if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(Silian_blockEntity)) {
+    //$$         PluslsCarpetAdditionReference.getLogger().debug("update HopperBlockEntity: {}", Silian_pos);
     //$$     }
     //$$ }
     //#endif
@@ -67,7 +67,7 @@ public abstract class MixinHopperBlockEntity extends RandomizableContainerBlockE
                     value = "RETURN"
             )
     )
-    private void postSetChanged(CallbackInfo ci) {
+    private void postSetChanged(CallbackInfo Silian_ci) {
         if (PluslsCarpetAdditionSettings.pcaSyncProtocol && PcaSyncProtocol.syncBlockEntityToClient(this)) {
             PluslsCarpetAdditionReference.getLogger().debug("update HopperBlockEntity: {}", this.worldPosition);
         }

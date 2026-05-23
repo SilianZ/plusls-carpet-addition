@@ -29,8 +29,8 @@ import net.minecraft.world.level.block.CauldronBlock;
 
 public class PotionDispenserBehavior extends MyFallibleItemDispenserBehavior {
 
-    public PotionDispenserBehavior(DispenseItemBehavior oldDispenserBehavior) {
-        super(oldDispenserBehavior);
+    public PotionDispenserBehavior(DispenseItemBehavior Silian_oldDispenserBehavior) {
+        super(Silian_oldDispenserBehavior);
     }
 
     public static void init() {
@@ -43,50 +43,50 @@ public class PotionDispenserBehavior extends MyFallibleItemDispenserBehavior {
     }
 
     @Override
-    public ItemStack dispenseSilently(BlockSource pointer, ItemStack itemStack) {
+    public ItemStack dispenseSilently(BlockSource Silian_pointer, ItemStack Silian_itemStack) {
         if (!PluslsCarpetAdditionSettings.potionRecycle) {
-            return itemStack;
+            return Silian_itemStack;
         }
-        BlockPos faceBlockPos = pointer.getPos().relative(pointer.getBlockState().getValue(DispenserBlock.FACING));
-        Level world = pointer.getLevel();
-        BlockState faceBlockState = world.getBlockState(faceBlockPos);
+        BlockPos Silian_faceBlockPos = Silian_pointer.getPos().relative(Silian_pointer.getBlockState().getValue(DispenserBlock.FACING));
+        Level Silian_world = Silian_pointer.getLevel();
+        BlockState Silian_faceBlockState = Silian_world.getBlockState(Silian_faceBlockPos);
         //#if MC > 11605
-        //$$ if (faceBlockState.getBlock() instanceof AbstractCauldronBlock) {
+        //$$ if (Silian_faceBlockState.getBlock() instanceof AbstractCauldronBlock) {
         //$$     setSuccess(true);
-        //$$     if (faceBlockState.getBlock() == Blocks.WATER_CAULDRON) {
-        //$$         int level = faceBlockState.getValue(LayeredCauldronBlock.LEVEL);
-        //$$         if (level == 3) {
-        //$$             return itemStack;
+        //$$     if (Silian_faceBlockState.getBlock() == Blocks.WATER_CAULDRON) {
+        //$$         int Silian_level = Silian_faceBlockState.getValue(LayeredCauldronBlock.LEVEL);
+        //$$         if (Silian_level == 3) {
+        //$$             return Silian_itemStack;
         //$$         } else {
-        //$$             world.setBlockAndUpdate(faceBlockPos, faceBlockState.setValue(LayeredCauldronBlock.LEVEL, level + 1));
-        //$$             world.playSound(null, faceBlockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-        //$$             world.gameEvent(null, GameEvent.FLUID_PLACE, faceBlockPos);
+        //$$             Silian_world.setBlockAndUpdate(Silian_faceBlockPos, Silian_faceBlockState.setValue(LayeredCauldronBlock.LEVEL, Silian_level + 1));
+        //$$             Silian_world.playSound(null, Silian_faceBlockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+        //$$             Silian_world.gameEvent(null, GameEvent.FLUID_PLACE, Silian_faceBlockPos);
         //$$             return new ItemStack(Items.GLASS_BOTTLE);
         //$$
         //$$         }
-        //$$     } else if (faceBlockState.getBlock() == Blocks.CAULDRON) {
-        //$$         world.setBlockAndUpdate(faceBlockPos, Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 1));
-        //$$         world.playSound(null, faceBlockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-        //$$         world.gameEvent(null, GameEvent.FLUID_PLACE, faceBlockPos);
+        //$$     } else if (Silian_faceBlockState.getBlock() == Blocks.CAULDRON) {
+        //$$         Silian_world.setBlockAndUpdate(Silian_faceBlockPos, Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 1));
+        //$$         Silian_world.playSound(null, Silian_faceBlockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+        //$$         Silian_world.gameEvent(null, GameEvent.FLUID_PLACE, Silian_faceBlockPos);
         //$$         return new ItemStack(Items.GLASS_BOTTLE);
         //$$     }
         //$$ }
         //#else
-        if (faceBlockState.getBlock() instanceof CauldronBlock) {
+        if (Silian_faceBlockState.getBlock() instanceof CauldronBlock) {
             setSuccess(true);
-            if (faceBlockState.getBlock() == Blocks.CAULDRON) {
-                int level = faceBlockState.getValue(CauldronBlock.LEVEL);
-                if (level == 3) {
-                    return itemStack;
+            if (Silian_faceBlockState.getBlock() == Blocks.CAULDRON) {
+                int Silian_level = Silian_faceBlockState.getValue(CauldronBlock.LEVEL);
+                if (Silian_level == 3) {
+                    return Silian_itemStack;
                 } else {
-                    world.setBlockAndUpdate(faceBlockPos, faceBlockState.setValue(CauldronBlock.LEVEL, level + 1));
-                    world.playSound(null, faceBlockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    Silian_world.setBlockAndUpdate(Silian_faceBlockPos, Silian_faceBlockState.setValue(CauldronBlock.LEVEL, Silian_level + 1));
+                    Silian_world.playSound(null, Silian_faceBlockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
                     return new ItemStack(Items.GLASS_BOTTLE);
 
                 }
             }
         }
         //#endif
-        return itemStack;
+        return Silian_itemStack;
     }
 }

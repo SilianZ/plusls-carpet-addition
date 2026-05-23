@@ -31,7 +31,7 @@ import net.minecraft.data.BuiltinRegistries;
 @Mixin(NaturalSpawner.class)
 public class MixinNaturalSpawner {
     //#if MC > 11902
-    //$$ private static final HolderGetter<Biome> pca$lookup = VanillaRegistries.createLookup().asGetterLookup().lookupOrThrow(Registries.BIOME);
+    //$$ private static final HolderGetter<Biome> Silian_pca$lookup = VanillaRegistries.createLookup().asGetterLookup().lookupOrThrow(Registries.BIOME);
     //#endif
 
     //#if MC > 11502
@@ -44,37 +44,37 @@ public class MixinNaturalSpawner {
             argsOnly = true
     )
     //#if MC > 11701
-    //$$ private static Holder<Biome> modifyBiome(Holder<Biome> biome) {
+    //$$ private static Holder<Biome> modifyBiome(Holder<Biome> Silian_biome) {
     //#else
-    private static Biome modifyBiome(Biome biome) {
+    private static Biome modifyBiome(Biome Silian_biome) {
     //#endif
         if (PluslsCarpetAdditionSettings.spawnBiome != PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.DEFAULT) {
             if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.DESERT) {
-                biome = pca$getBiome(Biomes.DESERT);
+                Silian_biome = pca$getBiome(Biomes.DESERT);
             } else if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.PLAINS) {
-                biome = pca$getBiome(Biomes.PLAINS);
+                Silian_biome = pca$getBiome(Biomes.PLAINS);
             } else if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.THE_END) {
-                biome = pca$getBiome(Biomes.THE_END);
+                Silian_biome = pca$getBiome(Biomes.THE_END);
             } else if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.NETHER_WASTES) {
-                biome = pca$getBiome(Biomes.NETHER_WASTES);
+                Silian_biome = pca$getBiome(Biomes.NETHER_WASTES);
             }
         }
-        return biome;
+        return Silian_biome;
     }
 
     //#if MC > 11701
-    //$$ private static @NotNull Holder<Biome> pca$getBiome(ResourceKey<Biome> biome) {
+    //$$ private static @NotNull Holder<Biome> pca$getBiome(ResourceKey<Biome> Silian_biome) {
     //#elseif MC > 11502
-    private static Biome pca$getBiome(ResourceKey<Biome> biome) {
+    private static Biome pca$getBiome(ResourceKey<Biome> Silian_biome) {
     //#else
-    //$$ private static Biome pca$getBiome(Biome biome) {
+    //$$ private static Biome pca$getBiome(Biome Silian_biome) {
     //#endif
         //#if MC > 11902
-        //$$ return pca$lookup.getOrThrow(biome);
+        //$$ return Silian_pca$lookup.getOrThrow(Silian_biome);
         //#elseif MC > 11701
-        //$$ return Holder.direct(BuiltinRegistries.BIOME.get(biome));
+        //$$ return Holder.direct(BuiltinRegistries.BIOME.get(Silian_biome));
         //#elseif MC > 11502
-        return BuiltinRegistries.BIOME.get(biome);
+        return BuiltinRegistries.BIOME.get(Silian_biome);
         //#endif
     }
     //#else
@@ -86,8 +86,8 @@ public class MixinNaturalSpawner {
     //$$                 ordinal = 0
     //$$         )
     //$$ )
-    //$$ private static List<Biome.SpawnerData> modifyBiome0(ChunkGenerator<?> chunkGenerator, MobCategory category, BlockPos pos) {
-    //$$     return modifyBiome(chunkGenerator, category, pos);
+    //$$ private static List<Biome.SpawnerData> modifyBiome0(ChunkGenerator<?> Silian_chunkGenerator, MobCategory Silian_category, BlockPos Silian_pos) {
+    //$$     return modifyBiome(Silian_chunkGenerator, Silian_category, Silian_pos);
     //$$ }
     //$$
     //$$ @Redirect(
@@ -98,8 +98,8 @@ public class MixinNaturalSpawner {
     //$$                 ordinal = 0
     //$$         )
     //$$ )
-    //$$ private static List<Biome.SpawnerData> modifyBiome1(ChunkGenerator<?> chunkGenerator, MobCategory category, BlockPos pos) {
-    //$$     return modifyBiome(chunkGenerator, category, pos);
+    //$$ private static List<Biome.SpawnerData> modifyBiome1(ChunkGenerator<?> Silian_chunkGenerator, MobCategory Silian_category, BlockPos Silian_pos) {
+    //$$     return modifyBiome(Silian_chunkGenerator, Silian_category, Silian_pos);
     //$$ }
     //$$
     //$$ @Redirect(
@@ -110,30 +110,30 @@ public class MixinNaturalSpawner {
     //$$                 ordinal = 0
     //$$         )
     //$$ )
-    //$$ private static List<Biome.SpawnerData> modifyBiome2(Biome biome, MobCategory category) {
+    //$$ private static List<Biome.SpawnerData> modifyBiome2(Biome Silian_biome, MobCategory Silian_category) {
     //$$     if (PluslsCarpetAdditionSettings.spawnBiome != PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.DEFAULT) {
     //$$         if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.DESERT) {
-    //$$             biome = Biomes.DESERT;
+    //$$             Silian_biome = Biomes.DESERT;
     //$$         } else if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.PLAINS) {
-    //$$             biome = Biomes.DESERT;
+    //$$             Silian_biome = Biomes.DESERT;
     //$$         } else if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.THE_END) {
-    //$$             biome = Biomes.THE_END;
+    //$$             Silian_biome = Biomes.THE_END;
     //$$         } else if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.NETHER_WASTES) {
-    //$$             biome = Biomes.NETHER;
+    //$$             Silian_biome = Biomes.NETHER;
     //$$         }
     //$$     }
-    //$$     return biome.getMobs(category);
+    //$$     return Silian_biome.getMobs(Silian_category);
     //$$ }
     //$$
-    //$$ private static List<Biome.SpawnerData> modifyBiome(ChunkGenerator<?> chunkGenerator, MobCategory category, BlockPos pos) {
+    //$$ private static List<Biome.SpawnerData> modifyBiome(ChunkGenerator<?> Silian_chunkGenerator, MobCategory Silian_category, BlockPos Silian_pos) {
     //$$     if (PluslsCarpetAdditionSettings.spawnBiome != PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.DEFAULT) {
     //$$         if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.DESERT) {
-    //$$             return Biomes.DESERT.getMobs(category);
+    //$$             return Biomes.DESERT.getMobs(Silian_category);
     //$$         } else if (PluslsCarpetAdditionSettings.spawnBiome == PluslsCarpetAdditionSettings.PCA_SPAWN_BIOME.PLAINS) {
-    //$$             return Biomes.PLAINS.getMobs(category);
+    //$$             return Biomes.PLAINS.getMobs(Silian_category);
     //$$         }
     //$$     }
-    //$$     return chunkGenerator.getMobsAt(category, pos);
+    //$$     return Silian_chunkGenerator.getMobsAt(Silian_category, Silian_pos);
     //$$ }
     //#endif
 }

@@ -21,8 +21,8 @@ public class MixinAbstractContainerMenu {
                     ordinal = 0
             )
     )
-    private boolean insertItemIsStackable(ItemStack itemStack) {
-        return ShulkerBoxItemUtil.isStackable(itemStack);
+    private boolean insertItemIsStackable(ItemStack Silian_itemStack) {
+        return ShulkerBoxItemUtil.isStackable(Silian_itemStack);
     }
 
     @Redirect(
@@ -40,9 +40,9 @@ public class MixinAbstractContainerMenu {
             //#if MC > 12004
             //$$ Slot instance,
             //#endif
-            ItemStack itemStack
+            ItemStack Silian_itemStack
     ) {
-        return ShulkerBoxItemUtil.getMaxCount(itemStack);
+        return ShulkerBoxItemUtil.getMaxCount(Silian_itemStack);
     }
 
     @Redirect(
@@ -57,7 +57,7 @@ public class MixinAbstractContainerMenu {
                     ordinal = -1
             )
     )
-    private int removeStackGetMaxCount(ItemStack itemStack) {
-        return ShulkerBoxItemUtil.getMaxCount(itemStack);
+    private int removeStackGetMaxCount(ItemStack Silian_itemStack) {
+        return ShulkerBoxItemUtil.getMaxCount(Silian_itemStack);
     }
 }

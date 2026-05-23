@@ -39,15 +39,15 @@ import net.minecraft.nbt.CompoundTag;
 
 @Mixin(PotionItem.class)
 public abstract class MixinPotionItem extends Item {
-    public MixinPotionItem(Properties settings) {
-        super(settings);
+    public MixinPotionItem(Properties Silian_settings) {
+        super(Silian_settings);
     }
 
     //#if MC < 11900
     @Override
     @Intrinsic
-    public @NotNull InteractionResult useOn(UseOnContext useOnContext) {
-        return super.useOn(useOnContext);
+    public @NotNull InteractionResult useOn(UseOnContext Silian_useOnContext) {
+        return super.useOn(Silian_useOnContext);
     }
     //#endif
 
@@ -66,72 +66,72 @@ public abstract class MixinPotionItem extends Item {
             ),
             cancellable = true
     )
-    public void preUseOn(@NotNull UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
-        ItemStack itemStack = useOnContext.getItemInHand();
-        Player player = useOnContext.getPlayer();
+    public void preUseOn(@NotNull UseOnContext Silian_useOnContext, CallbackInfoReturnable<InteractionResult> Silian_cir) {
+        ItemStack Silian_itemStack = Silian_useOnContext.getItemInHand();
+        Player Silian_player = Silian_useOnContext.getPlayer();
 
         if (!PluslsCarpetAdditionSettings.useDyeOnShulkerBox ||
-                player == null ||
-                itemStack.getItem() != Items.POTION ||
+                Silian_player == null ||
+                Silian_itemStack.getItem() != Items.POTION ||
                 //#if MC > 12004
-                //$$ !itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).is(Potions.WATER)
+                //$$ !Silian_itemStack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).is(Potions.WATER)
                 //#else
-                PotionUtils.getPotion(itemStack) != Potions.WATER
+                PotionUtils.getPotion(Silian_itemStack) != Potions.WATER
             //#endif
         ) {
             return;
         }
 
-        Level level = useOnContext.getLevel();
-        BlockPos pos = useOnContext.getClickedPos();
-        BlockState blockState = level.getBlockState(pos);
-        Block block = blockState.getBlock();
+        Level Silian_level = Silian_useOnContext.getLevel();
+        BlockPos Silian_pos = Silian_useOnContext.getClickedPos();
+        BlockState Silian_blockState = Silian_level.getBlockState(Silian_pos);
+        Block Silian_block = Silian_blockState.getBlock();
 
-        if (block instanceof ShulkerBoxBlock &&
-                ((ShulkerBoxBlock) block).getColor() != null) {
-            if (!level.isClientSide()) {
-                ShulkerBoxBlockEntity blockEntity = (ShulkerBoxBlockEntity) level.getBlockEntity(pos);
-                BlockState newBlockState = Blocks.SHULKER_BOX.defaultBlockState().
-                        setValue(ShulkerBoxBlock.FACING, blockState.getValue(ShulkerBoxBlock.FACING));
+        if (Silian_block instanceof ShulkerBoxBlock &&
+                ((ShulkerBoxBlock) Silian_block).getColor() != null) {
+            if (!Silian_level.isClientSide()) {
+                ShulkerBoxBlockEntity Silian_blockEntity = (ShulkerBoxBlockEntity) Silian_level.getBlockEntity(Silian_pos);
+                BlockState Silian_newBlockState = Blocks.SHULKER_BOX.defaultBlockState().
+                        setValue(ShulkerBoxBlock.FACING, Silian_blockState.getValue(ShulkerBoxBlock.FACING));
 
-                if (level.setBlockAndUpdate(pos, newBlockState)) {
-                    ShulkerBoxBlockEntity newBlockEntity = (ShulkerBoxBlockEntity) level.getBlockEntity(pos);
-                    assert blockEntity != null;
-                    assert newBlockEntity != null;
-                    newBlockEntity.loadFromTag(
+                if (Silian_level.setBlockAndUpdate(Silian_pos, Silian_newBlockState)) {
+                    ShulkerBoxBlockEntity Silian_newBlockEntity = (ShulkerBoxBlockEntity) Silian_level.getBlockEntity(Silian_pos);
+                    assert Silian_blockEntity != null;
+                    assert Silian_newBlockEntity != null;
+                    Silian_newBlockEntity.loadFromTag(
                             //#if MC > 11701
-                            //$$ blockEntity.saveWithoutMetadata(
+                            //$$ Silian_blockEntity.saveWithoutMetadata(
                             //#if MC > 12004
-                            //$$         level.registryAccess()
+                            //$$         Silian_level.registryAccess()
                             //#endif
                             //$$ )
                             //#else
                             new CompoundTag()
                             //#endif
                             //#if MC > 12004
-                            //$$ , level.registryAccess()
+                            //$$ , Silian_level.registryAccess()
                             //#endif
                     );
                     //#if MC > 12004
-                    //$$ ((AccessorBaseContainerBlockEntity) newBlockEntity).pca$setName(blockEntity.getCustomName());
+                    //$$ ((AccessorBaseContainerBlockEntity) Silian_newBlockEntity).pca$setName(Silian_blockEntity.getCustomName());
                     //#else
-                    newBlockEntity.setCustomName(blockEntity.getCustomName());
+                    Silian_newBlockEntity.setCustomName(Silian_blockEntity.getCustomName());
                     //#endif
-                    newBlockEntity.setChanged();
+                    Silian_newBlockEntity.setChanged();
 
-                    if (!player.isCreative()) {
-                        useOnContext.getItemInHand().shrink(1);
-                        PlayerCompat playerCompat = PlayerCompat.of(useOnContext.getPlayer());
-                        playerCompat.getInventory().add(new ItemStack(Items.GLASS_BOTTLE));
+                    if (!Silian_player.isCreative()) {
+                        Silian_useOnContext.getItemInHand().shrink(1);
+                        PlayerCompat Silian_playerCompat = PlayerCompat.of(Silian_useOnContext.getPlayer());
+                        Silian_playerCompat.getInventory().add(new ItemStack(Items.GLASS_BOTTLE));
                     }
                 }
             }
 
-            cir.setReturnValue(
+            Silian_cir.setReturnValue(
                     //#if MC > 11802
-                    //$$ InteractionResult.sidedSuccess(level.isClientSide)
+                    //$$ InteractionResult.sidedSuccess(Silian_level.isClientSide)
                     //#else
-                    level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.PASS
+                    Silian_level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.PASS
                     //#endif
             );
         }

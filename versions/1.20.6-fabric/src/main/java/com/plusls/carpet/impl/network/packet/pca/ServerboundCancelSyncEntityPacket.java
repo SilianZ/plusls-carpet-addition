@@ -10,7 +10,7 @@ public record ServerboundCancelSyncEntityPacket() implements CustomPacketPayload
     public static final Type<ServerboundCancelSyncEntityPacket> TYPE = new Type<>(PcaSyncProtocol.CANCEL_SYNC_ENTITY);
     public static final StreamCodec<FriendlyByteBuf, ServerboundCancelSyncEntityPacket> CODEC = CustomPacketPayload.codec(ServerboundCancelSyncEntityPacket::write, ServerboundCancelSyncEntityPacket::new);
 
-    public ServerboundCancelSyncEntityPacket(FriendlyByteBuf byteBuf) {
+    public ServerboundCancelSyncEntityPacket(FriendlyByteBuf Silian_byteBuf) {
         this();
     }
 
@@ -19,6 +19,6 @@ public record ServerboundCancelSyncEntityPacket() implements CustomPacketPayload
         return ServerboundCancelSyncEntityPacket.TYPE;
     }
 
-    private void write(FriendlyByteBuf byteBuf) {
+    private void write(FriendlyByteBuf Silian_byteBuf) {
     }
 }

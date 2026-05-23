@@ -18,25 +18,25 @@ import top.hendrixshen.magiclib.api.compat.minecraft.nbt.TagCompat;
 public class ShulkerBoxItemUtil {
     public static final int SHULKERBOX_MAX_STACK_AMOUNT = 64;
 
-    public static boolean isEmptyShulkerBoxItem(@NotNull ItemStack itemStack) {
+    public static boolean isEmptyShulkerBoxItem(@NotNull ItemStack Silian_itemStack) {
         //#if MC > 12004
-        //$$ ItemContainerContents countContainer = itemStack.getComponents().get(DataComponents.CONTAINER);
-        //$$ return countContainer == null || !countContainer.nonEmptyItems().iterator().hasNext();
+        //$$ ItemContainerContents Silian_countContainer = Silian_itemStack.getComponents().get(DataComponents.CONTAINER);
+        //$$ return Silian_countContainer == null || !Silian_countContainer.nonEmptyItems().iterator().hasNext();
         //#else
 
-        if (!(itemStack.getItem() instanceof BlockItem) ||
-                !(((BlockItem) itemStack.getItem()).getBlock() instanceof ShulkerBoxBlock)) {
+        if (!(Silian_itemStack.getItem() instanceof BlockItem) ||
+                !(((BlockItem) Silian_itemStack.getItem()).getBlock() instanceof ShulkerBoxBlock)) {
             return false;
         }
 
-        CompoundTag nbt = itemStack.getTag();
+        CompoundTag Silian_nbt = Silian_itemStack.getTag();
 
-        if (nbt != null && nbt.contains("BlockEntityTag", TagCompat.TAG_COMPOUND)) {
-            CompoundTag tag = nbt.getCompound("BlockEntityTag");
+        if (Silian_nbt != null && Silian_nbt.contains("BlockEntityTag", TagCompat.TAG_COMPOUND)) {
+            CompoundTag Silian_tag = Silian_nbt.getCompound("BlockEntityTag");
 
-            if (tag.contains("Items", 9)) {
-                ListTag tagList = tag.getList("Items", TagCompat.TAG_COMPOUND);
-                return !tagList.isEmpty();
+            if (Silian_tag.contains("Items", 9)) {
+                ListTag Silian_tagList = Silian_tag.getList("Items", TagCompat.TAG_COMPOUND);
+                return !Silian_tagList.isEmpty();
             }
         }
 
@@ -44,15 +44,15 @@ public class ShulkerBoxItemUtil {
         //#endif
     }
 
-    public static int getMaxCount(ItemStack itemStack) {
-        if (PluslsCarpetAdditionSettings.emptyShulkerBoxStack && ShulkerBoxItemUtil.isEmptyShulkerBoxItem(itemStack)) {
+    public static int getMaxCount(ItemStack Silian_itemStack) {
+        if (PluslsCarpetAdditionSettings.emptyShulkerBoxStack && ShulkerBoxItemUtil.isEmptyShulkerBoxItem(Silian_itemStack)) {
             return ShulkerBoxItemUtil.SHULKERBOX_MAX_STACK_AMOUNT;
         } else {
-            return itemStack.getMaxStackSize();
+            return Silian_itemStack.getMaxStackSize();
         }
     }
 
-    public static boolean isStackable(ItemStack itemStack) {
-        return getMaxCount(itemStack) > 1 && (!itemStack.isDamageableItem() || !itemStack.isDamaged());
+    public static boolean isStackable(ItemStack Silian_itemStack) {
+        return getMaxCount(Silian_itemStack) > 1 && (!Silian_itemStack.isDamageableItem() || !Silian_itemStack.isDamaged());
     }
 }
